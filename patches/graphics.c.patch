@@ -1,0 +1,77 @@
+--- graphics.c.orig	2011-03-10 03:52:49.335824001 -0800
++++ graphics.c	2011-03-29 00:26:23.229824001 -0700
+@@ -68,18 +68,33 @@
+         return -1;
+     }
+ 
+-    if (ioctl(fd, FBIOGET_FSCREENINFO, &fi) < 0) {
++    if (ioctl(fd, FBIOGET_VSCREENINFO, &vi) < 0) {
+         perror("failed to get fb0 info");
+         close(fd);
+         return -1;
+     }
+ 
+-    if (ioctl(fd, FBIOGET_VSCREENINFO, &vi) < 0) {
++    if (vi.bits_per_pixel != 16)
++    {
++        vi.bits_per_pixel = 16;
++        if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
++            perror("failed to put fb0 info");
++            close(fd);
++            return -1;
++        }
++        if (ioctl(fd, FBIOGET_VSCREENINFO, &vi) < 0) {
++            perror("failed to get fb0 info");
++            close(fd);
++            return -1;
++        }
++    }
++    if (ioctl(fd, FBIOGET_FSCREENINFO, &fi) < 0) {
+         perror("failed to get fb0 info");
+         close(fd);
+         return -1;
+     }
+ 
++
+     bits = mmap(0, fi.smem_len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+     if (bits == MAP_FAILED) {
+         perror("failed to mmap framebuffer");
+@@ -90,29 +105,18 @@
+     fb->version = sizeof(*fb);
+     fb->width = vi.xres;
+     fb->height = vi.yres;
+-#ifdef BOARD_HAS_JANKY_BACKBUFFER
+-    fb->stride = fi.line_length/2;
+-#else
+-    fb->stride = vi.xres;
+-#endif
++    fb->stride = fi.line_length/2; /* stride is the number of pixels until the data of next row, >= xres */;
+     fb->data = bits;
+     fb->format = GGL_PIXEL_FORMAT_RGB_565;
+-    memset(fb->data, 0, vi.yres * vi.xres * 2);
+ 
+     fb++;
+ 
+     fb->version = sizeof(*fb);
+     fb->width = vi.xres;
+     fb->height = vi.yres;
+-#ifdef BOARD_HAS_JANKY_BACKBUFFER
+     fb->stride = fi.line_length/2;
+     fb->data = (void*) (((unsigned) bits) + vi.yres * fi.line_length);
+-#else
+-    fb->stride = vi.xres;
+-    fb->data = (void*) (((unsigned) bits) + vi.yres * vi.xres * 2);
+-#endif
+     fb->format = GGL_PIXEL_FORMAT_RGB_565;
+-    memset(fb->data, 0, vi.yres * vi.xres * 2);
+ 
+     return fd;
+ }
+@@ -303,6 +307,7 @@
+     set_active_framebuffer(0);
+     gl->colorBuffer(gl, &gr_mem_surface);
+ 
++
+     gl->activeTexture(gl, 0);
+     gl->enable(gl, GGL_BLEND);
+     gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);

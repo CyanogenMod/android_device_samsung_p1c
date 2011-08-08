@@ -1,0 +1,21 @@
+#!/bin/bash
+HERE=`pwd`
+DEPTH=../../../..
+
+cd ${DEPTH}/system/bluetooth/bluedroid
+# fix for 32bit fb
+patch -p0 < ${HERE}/bluetooth.c.patch
+cd ${HERE}
+
+
+cd ${DEPTH}/bootable/recovery/minui
+# fix for 32bit fb
+patch -p0 < ${HERE}/graphics.c.patch
+cd ${HERE}
+
+cd ${DEPTH}/bootable/recovery/utilities
+chmod a+x parted
+chmod a+x sdparted
+chmod a+x fix_permissions
+cd ${HERE}
+

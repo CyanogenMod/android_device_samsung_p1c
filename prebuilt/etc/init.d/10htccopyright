@@ -1,0 +1,4 @@
+#!/system/bin/sh
+# disable com.htc.copyright
+
+pm disable com.htc.copyright

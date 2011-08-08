@@ -1,0 +1,8 @@
+these are build tools to create system images etc for Galaxy Tab
+
+you will need the following tools
+
+Heimdall http://www.glassechidna.com.au/products/heimdall/
+ynyaffs http://code.google.com/p/unyaffs/
+
+loop and ext4 support in kernel

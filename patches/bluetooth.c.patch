@@ -1,0 +1,25 @@
+--- bluetooth.c.org	2011-03-27 19:46:46.173824001 -0700
++++ bluetooth.c	2011-02-07 01:17:28.000000000 -0800
+@@ -156,6 +156,7 @@
+     if (set_bluetooth_power(1) < 0) goto out;
+ 
+     LOGI("Starting hciattach daemon");
++    property_set("ctl.stop", "hciattach"); // stop the daemon first
+     if (property_set("ctl.start", "hciattach") < 0) {
+         LOGE("Failed to start hciattach");
+         goto out;
+@@ -175,12 +176,14 @@
+     }
+     if (attempt == 0) {
+         LOGE("%s: Timeout waiting for HCI device to come up", __FUNCTION__);
++        property_set("ctl.stop", "hciattach"); // stop the daemon if it failed
+         goto out;
+     }
+ 
+     LOGI("Starting bluetoothd deamon");
+     if (property_set("ctl.start", "bluetoothd") < 0) {
+         LOGE("Failed to start bluetoothd");
++        property_set("ctl.stop", "hciattach"); // stop the daemon if it failed
+         goto out;
+     }
+     sleep(HCID_START_DELAY_SEC);

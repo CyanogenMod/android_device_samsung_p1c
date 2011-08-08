@@ -1,0 +1,3 @@
+adb reboot download
+sleep 5
+heimdall flash --kernel zImage --factoryfs factoryfs.ext4

@@ -1,0 +1,62 @@
+#!/bin/bash
+
+DEST=.
+
+set_perm() {
+# user group permissions file
+    echo set_perm $1 $2 $3 ${DEST}$4
+    chown $1:$2 ${DEST}$4
+    chmod $3 ${DEST}$4
+}
+
+set_perm_recursive2() {
+# user group dirpermission filepermission file
+    echo set_perm_recursive $1 $2 $3 $4 $5
+    chown -v $1:$2 $5
+    if [ -d $5 ]; then
+	chmod -v $3 $5
+	local FILE
+	for FILE in $5/* ; do
+	    if [ -d ${FILE} ]; then
+		set_perm_recursive2 $1 $2 $3 $4 ${FILE}
+	    fi
+	    if [ -f ${FILE} ]; then
+		chown -v $1:$2 ${FILE}
+		chmod -v $4 ${FILE}
+	    fi
+	done
+    fi
+    if [ -f $5 ]; then
+	chmod -v $4 $5
+    fi
+}
+
+
+set_perm_recursive() {
+    set_perm_recursive2 $1 $2 $3 $4 ${DEST}$5
+}
+
+
+package_extract_file() {
+    echo package_extract_file $1 to ${DEST}$2
+    cp -v ${SRC}/$1 ${DEST}$2
+}
+
+package_extract_dir() {
+    echo package_extract_dir  $1 to ${DEST}$2
+    cp -r -v ${SRC}/$1/* ${DEST}$2
+}
+
+symlink() {
+    echo symlink $1 $2 ...
+    local SFILE=$1
+    shift
+    while (($#)); do
+	ln -sfv ${SFILE} ${DEST}$1
+	shift
+    done
+
+}
+
+
+echo Functions
