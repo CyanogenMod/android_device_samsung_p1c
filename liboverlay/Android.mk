@@ -24,16 +24,15 @@ ifdef BOARD_V4L2_DEVICE
     LOCAL_CFLAGS += -DV4L2_DEVICE=\"$(BOARD_V4L2_DEVICE)\"
 endif
 
-
 LOCAL_C_INCLUDES:= \
-      $(LOCAL_PATH)/../include
-
+      $(LOCAL_PATH)/../../aries-common/include
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 
-LOCAL_SRC_FILES := v4l2_utils.c overlay.cpp
+LOCAL_SRC_FILES := ../../aries-common/liboverlay/v4l2_utils.c \
+                   ../../aries-common/liboverlay/overlay.cpp
 
 LOCAL_MODULE := overlay.$(TARGET_BOOTLOADER_BOARD_NAME)
 LOCAL_MODULE_TAGS := optional

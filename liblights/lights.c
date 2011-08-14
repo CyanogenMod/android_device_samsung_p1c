@@ -38,6 +38,8 @@ char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
 
 char const*const LCD_BACKLIGHT_FILE = "/sys/class/backlight/s5p_bl/brightness";
 
+char const*const NOTIFICATION_FILE = "/sys/class/misc/backlightnotification/notification_led";
+
 /**
  * Aux method, write int to file
  */
@@ -108,6 +110,20 @@ static int set_light_backlight(struct light_device_t* dev,
 	return err;
 }
 
+static int
+set_light_notifications(struct light_device_t* dev,
+	struct light_state_t const* state)
+{
+	int err = 0;
+	int on = is_lit(state);
+	LOGV("%s color=%08x flashMode=%d flashOnMS=%d flashOffMS=%d\n", __func__,
+	     state->color, state->flashMode, state->flashOnMS, state->flashOffMS);
+	pthread_mutex_lock(&g_lock);
+	err = write_int(NOTIFICATION_FILE, on?1:0);
+	pthread_mutex_unlock(&g_lock);
+	return err;
+}
+
 static int close_lights (struct light_device_t *dev) {
 	if (dev)
 		free (dev);
@@ -125,6 +141,9 @@ static int open_lights (const struct hw_module_t* module, char const* name,
 	}
 	else if (0 == strcmp(LIGHT_ID_BUTTONS, name)) {
 		set_light = set_light_buttons;
+	}
+	else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
+		set_light = set_light_notifications;
 	}
 	else {
 		return -EINVAL;
@@ -155,7 +174,7 @@ const struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.version_major = 1,
 	.version_minor = 0,
 	.id = LIGHTS_HARDWARE_MODULE_ID,
-	.name = "SCH-I800 lights module",
+	.name = "GT-P1000/SCH-I800 lights module",
 	.author = "Dominik Behr",
 	.methods = &lights_module_methods,
 };

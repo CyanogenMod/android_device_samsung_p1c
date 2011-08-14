@@ -15,7 +15,7 @@
 */
 
 #define LOG_TAG "alsa_pcm"
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 #include <cutils/log.h>
 #include <cutils/config_utils.h>
 
@@ -235,7 +235,6 @@ int pcm_write(struct pcm *pcm, void *data, unsigned count)
     x.buf = data;
     x.frames = (pcm->flags & PCM_MONO) ? (count / 2) : (count / 4);
 
-    //LOGV("write() %d frames", x.frames);
     for (;;) {
         if (!pcm->running) {
             if (ioctl(pcm->fd, SNDRV_PCM_IOCTL_PREPARE))

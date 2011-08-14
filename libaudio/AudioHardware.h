@@ -24,8 +24,9 @@
 #include <utils/SortedVector.h>
 
 #include <hardware_legacy/AudioHardwareBase.h>
+#include <media/mediarecorder.h>
 
-//#include "secril-client.h"
+#include "secril-client.h"
 
 extern "C" {
     struct pcm;
@@ -66,14 +67,18 @@ namespace android {
 // Default audio input buffer size in bytes (8kHz mono)
 #define AUDIO_HW_IN_PERIOD_BYTES ((AUDIO_HW_IN_PERIOD_SZ*sizeof(int16_t))/8)
 
-//#define INPUT_SOURCE_KEY "Input Source"
-//#define VIOCE_MEMO_PATH_KEY "Voice Memo Path"
 
 class AudioHardware : public AudioHardwareBase
 {
     class AudioStreamOutALSA;
     class AudioStreamInALSA;
 public:
+
+    // input path names used to translate from input sources to driver paths
+    static const char *inputPathNameDefault;
+    static const char *inputPathNameCamcorder;
+    static const char *inputPathNameVoiceRecognition;
+    static const char *inputPathNameVoiceCommunication;
 
     AudioHardware();
     virtual ~AudioHardware();
@@ -109,12 +114,14 @@ public:
             const char *getOutputRouteFromDevice(uint32_t device);
             const char *getInputRouteFromDevice(uint32_t device);
             const char *getVoiceRouteFromDevice(uint32_t device);
-  //          const char *getMicPathFromDevice();
 
             status_t setIncallPath_l(uint32_t device);
-            status_t setVoiceMemoPath_l(String8 path);
 
-//            status_t setInputSource_l(String8 source);
+#ifdef HAVE_FM_RADIO
+            status_t setFMRadioPath_l(uint32_t device);
+#endif
+
+            status_t setInputSource_l(audio_source source);
 
     static uint32_t    getInputSampleRate(uint32_t sampleRate);
            sp <AudioStreamInALSA> getActiveInput_l();
@@ -134,6 +141,13 @@ protected:
 
 private:
 
+    enum tty_modes {
+        TTY_MODE_OFF,
+        TTY_MODE_VCO,
+        TTY_MODE_HCO,
+        TTY_MODE_FULL
+    };
+
     bool            mInit;
     bool            mMicMute;
     sp <AudioStreamOutALSA>                 mOutput;
@@ -145,9 +159,10 @@ private:
     uint32_t        mMixerOpenCnt;
     bool            mInCallAudioMode;
 
-    String8         mInputSource;
+    audio_source    mInputSource;
     bool            mBluetoothNrec;
-/*
+    int             mTTYMode;
+
     void*           mSecRilLibHandle;
     HRilClient      mRilClient;
     bool            mActivatedCP;
@@ -161,7 +176,7 @@ private:
     int             (*setCallClockSync)(HRilClient, SoundClockCondition);
     void            loadRILD(void);
     status_t        connectRILDIfRequired(void);
-*/
+
     //  trace driver operations for dump
     int             mDriverOp;
 
@@ -207,8 +222,9 @@ private:
                 status_t open_l();
                 int standbyCnt() { return mStandbyCnt; }
 
-                void lock() { mLock.lock(); }
-                void unlock() { mLock.unlock(); }
+                int prepareLock();
+                void lock();
+                void unlock();
 
     private:
 
@@ -226,6 +242,7 @@ private:
         //  trace driver operations for dump
         int mDriverOp;
         int mStandbyCnt;
+        bool mSleepReq;
     };
 
     class DownSampler;
@@ -320,8 +337,9 @@ private:
         virtual status_t getNextBuffer(BufferProvider::Buffer* buffer);
         virtual void releaseBuffer(BufferProvider::Buffer* buffer);
 
-        void lock() { mLock.lock(); }
-        void unlock() { mLock.unlock(); }
+        int prepareLock();
+        void lock();
+        void unlock();
 
     private:
         Mutex mLock;
@@ -343,6 +361,7 @@ private:
         //  trace driver operations for dump
         int mDriverOp;
         int mStandbyCnt;
+        bool mSleepReq;
     };
 
 };
