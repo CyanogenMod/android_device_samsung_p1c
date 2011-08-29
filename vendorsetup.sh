@@ -20,6 +20,4 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo generic-eng
 
-add_lunch_combo samsung_galaxytab-userdebug
-add_lunch_combo samsung_galaxytab-eng
-
+add_lunch_combo samsung_vzwtabmtd-eng
