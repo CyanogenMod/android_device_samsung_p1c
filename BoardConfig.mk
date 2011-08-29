@@ -83,8 +83,8 @@ BOARD_CAMERA_DEVICE := /dev/video0
 BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # OpenGL stuff
-BOARD_EGL_CFG := vendor/samsung/common/SCH-I800/proprietary/egl/egl.cfg
-TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
+#BOARD_EGL_CFG := vendor/samsung/common/SCH-I800/proprietary/egl/egl.cfg
+#TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 
 # Device related defines
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
