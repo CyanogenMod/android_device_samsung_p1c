@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_vzwtabmtd.mk
+    $(LOCAL_DIR)/full_vzwtabmtd.mk
