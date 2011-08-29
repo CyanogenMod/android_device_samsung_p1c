@@ -1,5 +1,0 @@
-
-zip -9 tcm7beta.zip factoryfs.ext4 zImage dbdata.ext4 cache.ext4 flashme.sh readme.txt
-
-
-
