@@ -21,8 +21,10 @@
 # Set this up here so that BoardVendorConfig.mk can override it
 BOARD_USES_GENERIC_AUDIO := false
 
+BOARD_USES_LIBSECRIL_STUB := true
+
 # Use the non-open-source parts, if they're present
--include vendor/samsung/SCH-I800/BoardConfigVendor.mk
+-include vendor/samsung/vzwtabmtd/BoardConfigVendor.mk
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -45,23 +47,13 @@ TARGET_NO_BOOTLOADER := true
 #TARKET_NO_KERNEL := true
 TARGET_NO_RADIOIMAGE := true
 
-# Recovery
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_NO_RECOVERY_PARTITION := true
-BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_USES_BMLUTILS := true
-BOARD_HAS_DOWNLOAD_MODE := true
-TARGET_ROOT_IS_RECOVERY := true
-TARGET_BOOT_IS_RAMDISK := true
-
 TARGET_BOARD := SCH-I800
 #TARGET_PROVIDES_INIT := true
 #TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_BOARD_PLATFORM := s5pc110
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := galaxytab
-# override recovery init.rc with the default init.rc
-#TARGET_RECOVERY_INITRC := device/samsung/galaxytab/initramfs/init.rc
+TARGET_RECOVERY_INITRC := device/samsung/aries-common/recovery.rc
 BOARD_PROVIDES_BOOTMODE := true
 #BOARD_HAS_JANKY_BACKBUFFER := true
 
@@ -104,3 +96,22 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 196608000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2013265920
 # The size of a block that can be marked bad.
 BOARD_FLASH_BLOCK_SIZE := 4096
+
+# Vold
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+
+# Recovery
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_HAS_NO_RECOVERY_PARTITION := true
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_HAS_DOWNLOAD_MODE := true
+BOARD_USES_BML_OVER_MTD := true
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/aries-common/shbootimg.mk
+TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
+
+# Include aries specific stuff
+-include device/samsung/aries-common/Android.mk
+
+TARGET_OTA_ASSERT_DEVICE := aries,vzwtab,vzwtabmtd,galaxytab,SCH-I800
+
