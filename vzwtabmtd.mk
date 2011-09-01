@@ -172,7 +172,7 @@ PRODUCT_LOCALES := hdpi
 
 # kernel modules
 PRODUCT_COPY_FILES += $(foreach module,\
-	$(wildcard device/samsung/fascinatemtd/*.ko),\
+	$(wildcard device/samsung/vzwtabmtd/*.ko),\
 	$(module):system/lib/modules/$(notdir $(module)))
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
