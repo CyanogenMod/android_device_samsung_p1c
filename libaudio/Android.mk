@@ -1,4 +1,4 @@
-ifeq ($(TARGET_DEVICE),galaxytab)
+ifeq ($(TARGET_DEVICE),vzwtabmtd)
 
 LOCAL_PATH:= $(call my-dir)
 

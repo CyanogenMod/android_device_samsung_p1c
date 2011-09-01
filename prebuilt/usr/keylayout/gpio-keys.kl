@@ -1,0 +1,12 @@
+key 115   VOLUME_UP			WAKE
+key 114   VOLUME_DOWN		WAKE
+key 116   POWER     	    WAKE
+
+# for DFTA (can change scancode)
+key 232   DPAD_CENTER       WAKE_DROPPED
+key 108   DPAD_DOWN         WAKE_DROPPED
+key 103   DPAD_UP           WAKE_DROPPED
+key 105   DPAD_LEFT         WAKE_DROPPED
+key 106   DPAD_RIGHT        WAKE_DROPPED
+key 228   CAMERA
+key 231	  CALL

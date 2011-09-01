@@ -56,10 +56,8 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/aries-common/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
 	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -91,23 +89,8 @@ PRODUCT_PACKAGES += \
 
 # Libs
 PRODUCT_PACKAGES += \
-	libcamera \
 	libstagefrighthw
-
-# other packages
-PRODUCT_PACKAGES += \
-	LatinIME \
-	Pacman \
-	CMScreenshot \
-	screenshot \
-	FileManager
-
-# other stuffs
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtabmtd/prebuilt/etc/resolv.conf:system/etc/resolv.conf \
-	device/samsung/vzwtabmtd/prebuilt/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
-	device/samsung/vzwtabmtd/prebuilt/etc/terminfo/u/unknown:system/etc/terminfo/u/unknown \
-	device/samsung/vzwtabmtd/prebuilt/bin/backuptool.sh:system/bin/backuptool.sh
+#	libcamera
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -156,16 +139,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.telephony.ril_class=samsung \
        mobiledata.interfaces=pdp0,eth0,gprs,ppp0
 
-# some additional properties normally provided in CM overlay
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
-	ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-	ro.com.google.clientidbase=android-google \
-	ro.com.android.wifi-watchlist=GoogleGuest \
-	ro.setupwizard.enterprise_mode=1 \
-	ro.com.android.dateformat=MM-dd-yyyy \
-	ro.com.android.dataroaming=false
-
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
@@ -198,10 +171,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES := hdpi
 
 # kernel modules
-PRODUCT_COPY_FILES += \
-    device/samsung/vzwtabmtd/bcm4329.ko:system/lib/modules/bcm4329.ko \
-    device/samsung/vzwtabmtd/cifs.ko:system/lib/modules/cifs.ko \
-    device/samsung/vzwtabmtd/tun.ko:system/lib/modules/tun.ko
+PRODUCT_COPY_FILES += $(foreach module,\
+	$(wildcard device/samsung/fascinatemtd/*.ko),\
+	$(module):system/lib/modules/$(notdir $(module)))
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/vzwtabmtd/kernel
