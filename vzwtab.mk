@@ -83,6 +83,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
         device/samsung/vzwtab/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
 
+# 3G
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/prebuilt/bin/pppd_runner:system/bin/pppd_runner
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(TARGET_DEVICE),galaxytab)
+ifeq ($(TARGET_DEVICE),vzwtab)
 
 LOCAL_PATH := $(call my-dir)
 
