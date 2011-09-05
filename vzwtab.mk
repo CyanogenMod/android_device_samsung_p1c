@@ -38,41 +38,28 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/vzwtabmtd/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/vzwtab/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
-	device/samsung/vzwtabmtd/prebuilt/etc/asound.conf:system/etc/asound.conf \
-	device/samsung/vzwtabmtd/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-	device/samsung/aries-common/egl.cfg:system/lib/egl/egl.cfg
-
-# Init files
-PRODUCT_COPY_FILES += \
-	device/samsung/aries-common/init.rc:root/init.rc \
-	device/samsung/vzwtabmtd/init.aries.rc:root/init.aries.rc \
-	device/samsung/vzwtabmtd/ueventd.aries.rc:root/ueventd.aries.rc \
-	device/samsung/aries-common/setupenv.sh:recovery/root/sbin/setupenv.sh
-
+	device/samsung/vzwtab/prebuilt/etc/asound.conf:system/etc/asound.conf \
+	device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+	device/samsung/vzwtab/egl.cfg:system/lib/egl/egl.cfg
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/vzwtabmtd/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl
+	device/samsung/vzwtab/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
        cypress-touchkey.kcm \
        s3c-keypad.kcm
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs \
-	setup_fs
-
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/vzwtabmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -94,7 +81,7 @@ PRODUCT_PACKAGES += \
 
 # apns config file
 PRODUCT_COPY_FILES += \
-        device/samsung/vzwtabmtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
+        device/samsung/vzwtab/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -170,13 +157,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # PRODUCT_LOCALES expansion must not be a density.
 PRODUCT_LOCALES := hdpi
 
-# kernel modules
-PRODUCT_COPY_FILES += $(foreach module,\
-	$(wildcard device/samsung/vzwtabmtd/*.ko),\
-	$(module):system/lib/modules/$(notdir $(module)))
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/vzwtabmtd/kernel
+    LOCAL_KERNEL := device/samsung/vzwtab/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -184,11 +166,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-PRODUCT_COPY_FILES += \
-    device/samsung/aries-common/updater_cdma.sh:updater.sh
-
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/vzwtabmtd/vzwtabmtd-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/vzwtab/vzwtab-vendor.mk)
