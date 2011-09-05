@@ -30,7 +30,7 @@ adb pull /system/vendor/bin/gpsd ../../../vendor/$MANUFACTURER/$DEVICE/proprieta
 adb pull /system/etc/gps.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera.so
 adb pull /system/lib/hw/sensors.SCH-I800.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-adb pull /system/bin/pppd_runner ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/lib/hw/overlay.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
 adb pull /system/etc/wifi/nvram_net.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/wifi/nvram_mfg.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -60,6 +60,8 @@ adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$DEVICE/p
 adb pull /system/lib/libcameraservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libCaMotion.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/lib/libddc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/lib/libedid.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libPanoraMax1.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libs3cjpeg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libseccamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -129,7 +131,7 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gpsd:system/vendor/bin/gpsd \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gps.conf:system/etc/gps.conf \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/pppd_runner:system/bin/pppd_runner
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/overlay.s5pc110.so:system/lib/hw/s5pc110.so
 
 # All the blobs necessary for galaxys devices
 PRODUCT_COPY_FILES += \\
@@ -156,6 +158,8 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcameraservice.so:system/lib/libcameraservice.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libCaMotion.so:system/lib/libCaMotion.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcaps.so:system/lib/libcaps.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libddc.so:system/lib/libddc.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libedid.so:system/lib/libedid.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libPanoraMax1.so:system/lib/libPanoraMax1.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libs3cjpeg.so:system/lib/libs3cjpeg.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libseccamera.so:system/lib/libseccamera.so \\
