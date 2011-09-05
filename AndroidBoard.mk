@@ -37,4 +37,4 @@ include $(CLEAR_VARS)
 #include $(BUILD_PREBUILT)
 
 # include the non-open-source counterpart to this file
--include vendor/samsung/common/vzwtabmtd/AndroidBoardVendor.mk
+-include vendor/samsung/common/vzwtab/AndroidBoardVendor.mk

@@ -11,24 +11,30 @@
 ## part         - Partition # (1 based), or 'auto' for first usable partition.
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
-
-## Example of a standard sdcard mount for the emulator / Dream
-# Mounts the first usable partition of the specified device
-#dev_mount sdcard /mnt/sdcard auto /devices/platform/goldfish_mmc.0 /devices/platform/msm_sdcc.2/mmc_host/mmc1
-
-## Example of a dual card setup
-# dev_mount left_sdcard  /sdcard1  auto /devices/platform/goldfish_mmc.0 /devices/platform/msm_sdcc.2/mmc_host/mmc1
-# dev_mount right_sdcard /sdcard2  auto /devices/platform/goldfish_mmc.1 /devices/platform/msm_sdcc.3/mmc_host/mmc1
-
-## Example of specifying a specific partition for mounts
-# dev_mount sdcard /sdcard 2 /devices/platform/goldfish_mmc.0 /devices/platform/msm_sdcc.2/mmc_host/mmc1
+# /sys/devices/platform/usb_mass_storage/lun0/file
+# sdcard mount for the P1
+# internal sdcard
+#{
+#	ums_path = /sys/devices/platform/usb_mass_storage/lun0/file
+#	asec = disable
+#	discard = disable
+#	format_option = -r 1558
+#}
+#dev_mount sdcard /mnt/sdcard 1 /devices/platform/s3c-sdhci.0/mmc_host/mmc0
 
 # externel sdcard
 #{
-#	mount_deep = 0
-#	ums_path = /sys/devices/platform/s3c-usbgadget/gadget/lun1/file
+#	ums_path = /sys/devices/platform/usb_mass_storage/lun1/file
 #	asec = enable
-#	mbr_policy = overwrite
 #}
-dev_mount sdcard /mnt/sdcard auto /devices/platform/s3c-sdhci.2/mmc_host/mmc1 /devices/platform/s3c-sdhci.2/mmc_host/mmc2
+#dev_mount sdcard1 /mnt/sdcard/external_sd auto /devices/platform/s3c-sdhci.2/mmc_host/mmc1 /devices/platform/s3c-sdhci.2/mmc_host/mmc2
 #end line ## keep this line
+
+# externel sdcard
+{
+	mount_deep = 1
+	ums_path = /sys/devices/platform/usb_mass_storage/lun1/file
+	asec = enable
+	mbr_policy = overwrite
+}
+dev_mount sdcard1 /mnt/sdcard auto /devices/platform/s3c-sdhci.2/mmc_host/mmc1
