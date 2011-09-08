@@ -28,9 +28,10 @@ adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/hw/gps.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/vendor/bin/gpsd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/gps.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera.so
+adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.SCH-I800.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/hw/overlay.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/lib/hw/lights.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
 adb pull /system/etc/wifi/nvram_net.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/wifi/nvram_mfg.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -40,6 +41,8 @@ adb pull /system/etc/wifi/bcm4329_sta.bin ../../../vendor/$MANUFACTURER/$DEVICE/
 
 adb pull /system/bin/vold ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/vold.fstab ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+
+adb pull /system/bin/BCM4329B1_002.002.023.0534.0571.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
 # aries-common
 adb pull /system/bin/pvrsrvinit ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -76,6 +79,7 @@ adb pull /system/lib/libtvoutservice.so ../../../vendor/$MANUFACTURER/$DEVICE/pr
 adb pull /system/bin/tvoutserver ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+
 adb pull /system/bin/charging_mode ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/charging_mode
 adb pull /system/bin/playlpm ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/playlpm
 adb pull /system/lib/libQmageDecoder.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libQmageDecoder.so
@@ -128,12 +132,13 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecril-client.so:system/lib/libsecril-client.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsec-ril40.so:system/lib/libsec-ril40.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/sensors.SCH-I800.so:system/lib/hw/sensors.SCH-I800.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/sensors.SCH-I800.so:system/lib/hw/sensors.s5pc110.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/rild:system/bin/rild \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gpsd:system/vendor/bin/gpsd \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gps.conf:system/etc/gps.conf \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
 
 # All the blobs necessary for galaxys devices
 PRODUCT_COPY_FILES += \\
@@ -213,6 +218,10 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold:system/bin/vold \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold.fstab:system/etc/vold.fstab
+
+# bluetooth
+PRODUCT_COPY_FILES += \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/BCM4329B1_002.002.023.0534.0571.hcd:system/bin/BCM4329B1_002.002.023.0534.0571.hcd
 
 EOF
 

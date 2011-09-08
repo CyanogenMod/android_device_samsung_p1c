@@ -68,11 +68,6 @@ PRODUCT_PACKAGES += \
 	libOMX.SEC.M4V.Encoder.aries \
 	libOMX.SEC.AVC.Encoder.aries
 
-# Misc other modules
-PRODUCT_PACKAGES += \
-	lights.default \
-	overlay.aries
-
 # Libs
 PRODUCT_PACKAGES += \
 	libstagefrighthw
