@@ -38,6 +38,9 @@ adb pull /system/etc/wifi/bcm4329_aps.bin ../../../vendor/$MANUFACTURER/$DEVICE/
 adb pull /system/etc/wifi/bcm4329_mfg.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/wifi/bcm4329_sta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
+adb pull /system/bin/vold ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/etc/vold.fstab ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+
 # aries-common
 adb pull /system/bin/pvrsrvinit ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/egl/libGLES_android.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -205,6 +208,12 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_85.qmg:system/media/battery_charging_85.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_90.qmg:system/media/battery_charging_90.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_95.qmg:system/media/battery_charging_95.qmg
+
+# vold (sdcard)
+PRODUCT_COPY_FILES += \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold:system/bin/vold \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold.fstab:system/etc/vold.fstab
+
 EOF
 
 

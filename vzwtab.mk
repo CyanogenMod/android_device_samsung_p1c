@@ -43,7 +43,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/vzwtab/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
 	device/samsung/vzwtab/prebuilt/etc/asound.conf:system/etc/asound.conf \
-	device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
 	device/samsung/vzwtab/egl.cfg:system/lib/egl/egl.cfg
 
 # Prebuilt kl keymaps
