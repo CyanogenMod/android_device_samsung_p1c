@@ -43,7 +43,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/vzwtab/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
 	device/samsung/vzwtab/prebuilt/etc/asound.conf:system/etc/asound.conf \
-	device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
 	device/samsung/vzwtab/egl.cfg:system/lib/egl/egl.cfg
 
 # Prebuilt kl keymaps
@@ -69,11 +68,6 @@ PRODUCT_PACKAGES += \
 	libOMX.SEC.M4V.Encoder.aries \
 	libOMX.SEC.AVC.Encoder.aries
 
-# Misc other modules
-PRODUCT_PACKAGES += \
-	lights.default \
-	overlay.aries
-
 # Libs
 PRODUCT_PACKAGES += \
 	libstagefrighthw
@@ -86,6 +80,10 @@ PRODUCT_COPY_FILES += \
 # 3G
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/bin/pppd_runner:system/bin/pppd_runner
+
+# WiFi
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -128,7 +126,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
        net.connectivity.type=CDMA1 \
        net.interfaces.defaultroute=cdma \
        ro.telephony.ril_class=samsung \
-       mobiledata.interfaces=pdp0,eth0,gprs,ppp0
+       mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
+       ro.sf.hwrotation=90
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
