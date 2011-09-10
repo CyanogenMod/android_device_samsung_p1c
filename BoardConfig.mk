@@ -70,6 +70,9 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 # OpenGL stuff
 BOARD_EGL_CFG := device/samsung/vzwtab/egl.cfg
 
+# Orientation
+BOARD_USES_FUCKED_ORIENTATION := true
+
 # Device related defines
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_BASE := 0x32000000
