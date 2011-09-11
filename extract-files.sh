@@ -104,6 +104,10 @@ adb pull /system/media/battery_charging_80.qmg ../../../vendor/$MANUFACTURER/$DE
 adb pull /system/media/battery_charging_85.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/battery_charging_85.qmg
 adb pull /system/media/battery_charging_90.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/battery_charging_90.qmg
 adb pull /system/media/battery_charging_95.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/battery_charging_95.qmg
+adb pull /system/media/chargingwarning_disconnected.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/media/chargingwarning_temp.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+adb pull /system/media/usb_not_charging.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
+
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -213,7 +217,11 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_80.qmg:system/media/battery_charging_80.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_85.qmg:system/media/battery_charging_85.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_90.qmg:system/media/battery_charging_90.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_95.qmg:system/media/battery_charging_95.qmg
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/battery_charging_95.qmg:system/media/battery_charging_95.qmg \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/chargingwarning_disconnected.qmg:system/media/chargingwarning_disconnected.qmg \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/chargingwarning_temp.qmg:system/media/chargingwarning_temp.qmg \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/usb_not_charging.qmg:system/media/usb_not_charging.qmg
+
 
 # vold (sdcard)
 PRODUCT_COPY_FILES += \\
