@@ -100,6 +100,12 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
+# extra stuff
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite \
+	device/samsung/vzwtab/prebuilt/xbin/ro:system/xbin/ro \
+	device/samsung/vzwtab/prebuilt/xbin/rw:system/xbin/rw
+
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \
