@@ -1,4 +1,0 @@
-#!/system/bin/sh
-
-#Disable PCM Clock
-echo 1 > /dev/snd/psmC1D0c
