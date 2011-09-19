@@ -32,10 +32,6 @@ ifeq ($(BOARD_HAVE_BLUETOOTH),true)
   LOCAL_SHARED_LIBRARIES += liba2dp
 endif
 
-ifeq ($(BOARD_HAVE_FM_RADIO),true)
-  LOCAL_CFLAGS += -DHAVE_FM_RADIO
-endif
-
 ifeq ($(TARGET_SIMULATOR),true)
  LOCAL_LDLIBS += -ldl
 else
@@ -53,4 +49,5 @@ ifeq ($(BOARD_HAVE_BLUETOOTH),true)
   LOCAL_CFLAGS += -DWITH_A2DP
 endif
 include $(BUILD_SHARED_LIBRARY)
+
 endif
