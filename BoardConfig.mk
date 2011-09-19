@@ -91,3 +91,6 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+# Override cyanogen squisher to customize our update zip package
+TARGET_CUSTOM_RELEASETOOL := ./device/samsung/vzwtab/releasetools/squisher
+
