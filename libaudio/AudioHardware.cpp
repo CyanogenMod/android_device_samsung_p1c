@@ -303,9 +303,9 @@ status_t AudioHardware::setMode(int mode)
                 struct mixer_ctl *ctl= mixer_get_control(mMixer, "Playback Path", 0);
                 TRACE_DRIVER_OUT
                 if (ctl != NULL) {
-                    LOGV("setMode() reset Playback Path to RCV");
+                    LOGV("setMode() reset Playback Path to SPK");
                     TRACE_DRIVER_IN(DRV_MIXER_SEL)
-                    mixer_ctl_select(ctl, "RCV");
+                    mixer_ctl_select(ctl, "SPK");
                     TRACE_DRIVER_OUT
                 }
             }
@@ -459,9 +459,6 @@ status_t AudioHardware::setVoiceVolume(float volume)
         const char* name;
         TRACE_DRIVER_IN(DRV_MIXER_GET)
         switch (device) {
-            case AudioSystem::DEVICE_OUT_EARPIECE:
-                name = "Playback Volume";
-                break;
             case AudioSystem::DEVICE_OUT_WIRED_HEADSET:
             case AudioSystem::DEVICE_OUT_WIRED_HEADPHONE:
                 name = "Playback Headset Volume";
@@ -667,7 +664,6 @@ const char *AudioHardware::getOutputRouteFromDevice(uint32_t device)
 {
     switch (device) {
     case AudioSystem::DEVICE_OUT_EARPIECE:
-        return "RCV";
     case AudioSystem::DEVICE_OUT_SPEAKER:
         if (mMode == AudioSystem::MODE_RINGTONE) return "RING_SPK";
         else return "SPK";
@@ -694,7 +690,6 @@ const char *AudioHardware::getVoiceRouteFromDevice(uint32_t device)
 {
     switch (device) {
     case AudioSystem::DEVICE_OUT_EARPIECE:
-        return "RCV";
     case AudioSystem::DEVICE_OUT_SPEAKER:
         return "SPK";
     case AudioSystem::DEVICE_OUT_WIRED_HEADPHONE:
