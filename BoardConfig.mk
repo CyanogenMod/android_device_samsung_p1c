@@ -91,6 +91,3 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-# Include aries specific stuff
--include device/samsung/aries-common/Android.mk
-

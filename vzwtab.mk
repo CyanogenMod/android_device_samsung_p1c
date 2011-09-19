@@ -57,21 +57,26 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+	device/samsung/vzwtab/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
-	libSEC_OMX_Core.aries \
-	libOMX.SEC.AVC.Decoder.aries \
-	libOMX.SEC.M4V.Decoder.aries \
-	libOMX.SEC.M4V.Encoder.aries \
-	libOMX.SEC.AVC.Encoder.aries
+	libSEC_OMX_Core.s5pc110 \
+	libOMX.SEC.AVC.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Encoder.s5pc110 \
+	libOMX.SEC.AVC.Encoder.s5pc110
 
 # Libs
 PRODUCT_PACKAGES += \
-	libstagefrighthw
+	libstagefrighthw \
+	overlay.s5pc110
 #	libcamera
+
+# sensor daemon
+PRODUCT_PACKAGES += \
+	akmd
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -102,9 +107,7 @@ PRODUCT_COPY_FILES += \
 
 # extra stuff
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite \
-	device/samsung/vzwtab/prebuilt/xbin/ro:system/xbin/ro \
-	device/samsung/vzwtab/prebuilt/xbin/rw:system/xbin/rw
+	device/samsung/vzwtab/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
@@ -140,7 +143,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=20 \
+       wifi.supplicant_scan_interval=45 \
        dalvik.vm.heapsize=48m
 
 # enable Google-specific location features,
