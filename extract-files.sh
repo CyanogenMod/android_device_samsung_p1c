@@ -39,9 +39,6 @@ adb pull /system/etc/wifi/bcm4329_aps.bin ../../../vendor/$MANUFACTURER/$DEVICE/
 adb pull /system/etc/wifi/bcm4329_mfg.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/etc/wifi/bcm4329_sta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
-adb pull /system/bin/vold ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-adb pull /system/etc/vold.fstab ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-
 adb pull /system/bin/BCM4329B1_002.002.023.0534.0571.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
 # aries-common
@@ -222,12 +219,6 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/chargingwarning_disconnected.qmg:system/media/chargingwarning_disconnected.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/chargingwarning_temp.qmg:system/media/chargingwarning_temp.qmg \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/usb_not_charging.qmg:system/media/usb_not_charging.qmg
-
-
-# vold (sdcard)
-PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold:system/bin/vold \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/vold.fstab:system/etc/vold.fstab
 
 # bluetooth
 PRODUCT_COPY_FILES += \\

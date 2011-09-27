@@ -247,6 +247,18 @@ on post-fs
     chown root root /cache/lost+found
     chmod 0770 /cache/lost+found
 
+    # allow net_raw to have access to /dev/socket directory
+    chown root net_raw /dev/socket
+    chmod 0775 /dev/socket
+
+# allow system to modify cpufreq control files
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
 #Permission changes
     chown system radio /sys/devices/platform/s3c2440-i2c.2/i2c-2/2-004a/update_fw
     chown system radio /sys/class/power_supply/battery/reset_soc
@@ -427,6 +439,10 @@ service console /system/bin/sh
     user shell
     group shell system log
     console
+    disabled
+
+on property:ro.secure=0
+    start console
 
 # Samsung USB Mode : system properties are linked with sysfs
 on property:persist.service.usb.setting=0
@@ -455,14 +471,12 @@ on property:persist.service.adb.enable=1
 on property:persist.service.adb.enable=0
     stop adbd
 
-
 # 3D init
 service pvrsrvinit /system/bin/pvrsrvinit
     user root
     group root
     oneshot
         
-
 service servicemanager /system/bin/servicemanager
     user system
     critical
@@ -484,7 +498,7 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw log
+    group radio cache inet misc audio sdcard_rw log net_admin net_raw
 
 service pppd_cdma /system/bin/pppd_runner
    user root

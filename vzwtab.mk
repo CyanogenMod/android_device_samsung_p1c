@@ -105,6 +105,10 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
+# vold
+PRODUCT_COPY_FILES += \
+        device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+
 # extra stuff
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
