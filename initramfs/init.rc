@@ -100,10 +100,6 @@ loglevel 3
     write /proc/sys/kernel/sched_compat_yield 1
     write /proc/sys/kernel/sched_child_runs_first 0
     
-# modified the permission for the vib daemon
-    chown root shell /dev/tspdrv
-    chmod 660 /dev/tspdrv
-	
 	chmod 0660 /dev/usb_mtp_gadget
 	chown system system /dev/usb_mtp_gadget
 
