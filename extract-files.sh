@@ -30,7 +30,6 @@ adb pull /system/vendor/bin/gpsd ../../../vendor/$MANUFACTURER/$DEVICE/proprieta
 adb pull /system/etc/gps.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-adb pull /system/lib/hw/lights.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/lib/hw/copybit.s5pc110.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 
 adb pull /system/etc/wifi/nvram_net.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -139,7 +138,6 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gpsd:system/vendor/bin/gpsd \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/gps.conf:system/etc/gps.conf \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so
 
 # All the blobs necessary for galaxys devices
