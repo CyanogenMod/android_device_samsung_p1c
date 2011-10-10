@@ -52,7 +52,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WLAN_DEVICE := bcm4329
-WIFI_DRIVER_MODULE_PATH := "/lib/modules/dhd.ko"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt dhd_watchdog_ms=10 dhd_poll=1"
 WIFI_DRIVER_FW_AP_PATH := "/system/etc/wifi/bcm4329_aps.bin"
 WIFI_DRIVER_FW_STA_PATH := "/system/etc/wifi/bcm4329_sta.bin"
@@ -69,9 +69,6 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # OpenGL stuff
 BOARD_EGL_CFG := device/samsung/vzwtab/egl.cfg
-
-# Orientation
-BOARD_USES_FUCKED_ORIENTATION := true
 
 # Device related defines
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
