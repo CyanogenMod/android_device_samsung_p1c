@@ -71,8 +71,8 @@ PRODUCT_PACKAGES += \
 # Libs
 PRODUCT_PACKAGES += \
 	libstagefrighthw \
-	overlay.s5pc110
-#	libcamera
+	overlay.s5pc110 \
+	lights.s5pc110
 
 # sensor daemon
 PRODUCT_PACKAGES += \
