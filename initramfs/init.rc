@@ -324,6 +324,12 @@ on boot
 # to enable wifi
      setprop wifi.interface "eth0"
 
+# Include extra init file
+    import /system/etc/init.local.rc
+
+# Run sysinit
+    exec /system/bin/sysinit
+
 # Define the memory thresholds at which the above process classes will
 # be killed.  These numbers are in pages (4k).
     setprop ro.FOREGROUND_APP_MEM 2048
@@ -350,8 +356,10 @@ on boot
     write /proc/1/oom_adj -16
 
     # Tweak background writeout
-    write /proc/sys/vm/dirty_expire_centisecs 800
-    write /proc/sys/vm/dirty_background_ratio  2
+    write /proc/sys/vm/dirty_writeback_centisecs 2000
+    write /proc/sys/vm/dirty_expire_centisecs 1000
+    write /proc/sys/vm/dirty_ratio 90
+    write /proc/sys/vm/dirty_background_ratio 5
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
@@ -616,9 +624,4 @@ on property:ril.cdma.data_ready=true
 
 on property:ril.cdma.data_ready=false
     stop pppd_cdma
-
-service akmd /system/bin/akmd 0 0
-    user root
-    group compass input misc
-    oneshot
 

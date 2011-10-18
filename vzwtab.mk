@@ -48,12 +48,8 @@ PRODUCT_COPY_FILES := \
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl
-
-# Generated kcm keymaps
-PRODUCT_PACKAGES := \
-       cypress-touchkey.kcm \
-       s3c-keypad.kcm
+	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl \
+	device/samsung/vzwtab/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
@@ -61,7 +57,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
 	libSEC_OMX_Core.s5pc110 \
 	libOMX.SEC.AVC.Decoder.s5pc110 \
 	libOMX.SEC.M4V.Decoder.s5pc110 \
@@ -73,10 +69,6 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	overlay.s5pc110 \
 	lights.s5pc110
-
-# sensor daemon
-PRODUCT_PACKAGES += \
-	akmd
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -139,7 +131,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
        net.connectivity.type=CDMA1 \
        net.interfaces.defaultroute=cdma \
        ro.telephony.ril_class=samsung \
-       mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
+       mobiledata.interfaces=eth0,ppp0 \
        ro.sf.hwrotation=90
 
 # These are the hardware-specific settings that are stored in system properties.

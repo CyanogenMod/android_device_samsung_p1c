@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<!-- Crespo-specific phone app resources. -->
+<!-- GalaxyS-specific phone app resources. -->
 <resources>
 
     <!-- Enable the onscreen touch UI for all states of the in-call UI. -->
@@ -30,35 +30,11 @@
     <!-- Enable the onscreen "Dial" button in the emergency dialer. -->
     <bool name="config_show_onscreen_dial_button">true</bool>
 
-    <!-- OTA configuration values, used when provisioning CDMA devices.
-         Following defaults values of zero means OTA UI is completely disabled.
-         These OTA UI can be enabled by setting config value to one in the product
-         specific overlay file -->
-
-    <!-- Determine whether we want to display the OTA activation screen, which
-         gives the user option to activate or cancel -->
-    <integer name="OtaShowActivationScreen">1</integer>
-    <!-- Determine whether we should show the "listen for instructions" screen after
-         successfully placing the OTA call -->
-    <integer name="OtaShowListeningScreen">1</integer>
-    <!-- The number of times we should show the activation screen/allow the provisioning
-         to fail before just showing an unsuccessful dialog -->
-    <integer name="OtaShowActivateFailTimes">0</integer>
-    <!-- Determine whether or not we should play the success/failure tone -->
-    <integer name="OtaPlaySuccessFailureTone">0</integer>
-
-    <!-- Flag indicating if the phone is a world phone -->
-    <bool name="world_phone">false</bool>
-
-    <!-- If true, enable vibration (haptic feedback) for key presses
-         in the EmergencyDialer activity. The pattern is set on a
-         per-platform basis using config_virtualKeyVibePattern.  To be
-         consistent with the regular Dialer, this value should agree
-         with the corresponding values from config.xml under
-         apps/Contacts. -->
-    <bool name="config_enable_dialer_key_vibration">true</bool>
+    <!--  AudioHardware::setMicMute(bool state) and AudioHardware::getMicMute(bool* state)
+         so microphone muting calls should be routed through the AudioManager API. -->
+    <bool name="send_mic_mute_to_AudioManager">false</bool>
 
     <!-- This device implements a noise suppression device for in call audio-->
-    <!-- <bool name="has_in_call_noise_suppression">true</bool> -->
+    <bool name="has_in_call_noise_suppression">true</bool>
 
 </resources>
