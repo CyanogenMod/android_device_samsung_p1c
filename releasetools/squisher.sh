@@ -9,5 +9,5 @@ rm -f $REPACK/ota/boot.img
 mkdir -p $REPACK/ota/kernel_update
 cp -f $ANDROID_BUILD_TOP/device/samsung/vzwtab/prebuilt/xbin/bmlwrite $REPACK/ota/kernel_update/bmlwrite
 cp -f $ANDROID_BUILD_TOP/device/samsung/vzwtab/kernel $REPACK/ota/kernel_update/zImage
-cp -f $ANDROID_BUILD_TOP/device/samsung/vzwtab/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
+cp -f $ANDROID_BUILD_TOP/device/samsung/vzwtab/releasetools/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
 
