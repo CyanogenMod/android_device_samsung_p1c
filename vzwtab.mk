@@ -172,7 +172,8 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    $(LOCAL_KERNEL):kernel \
+    device/samsung/vzwtab/dhd.ko:system/lib/modules/dhd.ko
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
