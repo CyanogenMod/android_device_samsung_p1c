@@ -38,11 +38,19 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
+TARGET_PROVIDES_INIT := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
+TARGET_RECOVERY_INITRC := device/samsung/vzwtab/recovery.rc
+
 TARGET_BOARD_PLATFORM := s5pv210
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 
 TARGET_PROVIDES_LIBAUDIO := true
+
+# Releasetools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/vzwtab/releasetools/vzwtab_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/vzwtab/releasetools/vzwtab_img_from_target_files
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -86,8 +94,8 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Recovery
+TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-
-# Override cyanogen squisher to customize our update zip package
-TARGET_CUSTOM_RELEASETOOL := ./device/samsung/vzwtab/releasetools/squisher
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/vzwtab/shbootimg.mk
+TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 

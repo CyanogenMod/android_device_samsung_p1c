@@ -45,6 +45,12 @@ PRODUCT_COPY_FILES := \
 	device/samsung/vzwtab/prebuilt/etc/asound.conf:system/etc/asound.conf \
 	device/samsung/vzwtab/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 
+# Init files
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/init.rc:root/init.rc \
+	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
+	device/samsung/vzwtab/lpm.rc:root/lpm.rc
+
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
@@ -69,6 +75,11 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	overlay.s5pc110 \
 	lights.s5pc110
+
+# update utilities
+PRODUCT_PACKAGES += \
+	make_ext4fs \
+	bootmenu_busybox
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -159,11 +170,35 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Screen density is actually considered a locale (since it is taken into account
-# the the build-time selection of resources). The product definitions including
-# this file must pay attention to the fact that the first entry in the final
-# PRODUCT_LOCALES expansion must not be a density.
-PRODUCT_LOCALES := hdpi
+# kernel modules
+# root
+PRODUCT_COPY_FILES += \
+    device/samsung/vzwtab/modules/fsr.ko:root/lib/modules/fsr.ko \
+    device/samsung/vzwtab/modules/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
+    device/samsung/vzwtab/modules/j4fs.ko:root/lib/modules/j4fs.ko \
+    device/samsung/vzwtab/modules/param.ko:root/lib/modules/param.ko \
+    device/samsung/vzwtab/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
+    device/samsung/vzwtab/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko
+
+#recovery
+PRODUCT_COPY_FILES += \
+    device/samsung/vzwtab/modules/fsr.ko:recovery/root/lib/modules/fsr.ko \
+    device/samsung/vzwtab/modules/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
+    device/samsung/vzwtab/modules/j4fs.ko:recovery/lib/modules/j4fs.ko \
+    device/samsung/vzwtab/modules/param.ko:recovery/lib/modules/param.ko \
+    device/samsung/vzwtab/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko \
+    device/samsung/vzwtab/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko
+
+#system
+PRODUCT_COPY_FILES += \
+    device/samsung/vzwtab/modules/bthid.ko:system/lib/modules/bthid.ko \
+    device/samsung/vzwtab/modules/storage.ko:system/lib/modules/storage.ko \
+    device/samsung/vzwtab/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/samsung/vzwtab/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
+    device/samsung/vzwtab/modules/vibrator.ko:system/lib/modules/vibrator.ko \
+    device/samsung/vzwtab/modules/dpram_vzw.ko:system/lib/modules/dpram_vzw.ko \
+    device/samsung/vzwtab/modules/hotspot_event_monitoring.ko:system/lib/modules/hotspot_event_monitoring.ko \
+    device/samsung/vzwtab/modules/dhd.ko:system/lib/modules/dhd.ko
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/vzwtab/kernel
@@ -172,8 +207,11 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
-    device/samsung/vzwtab/dhd.ko:system/lib/modules/dhd.ko
+    $(LOCAL_KERNEL):kernel
+
+# copy the filesystem converter
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

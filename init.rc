@@ -22,9 +22,6 @@ loglevel 3
     export LOOP_MOUNTPOINT /mnt/obb
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
-# ko files for vibrator
-    insmod /lib/modules/vibrator.ko
-
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
@@ -52,13 +49,6 @@ loglevel 3
     insmod /lib/modules/j4fs.ko
     mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
-    insmod /lib/modules/dpram_vzw.ko
-
-# samsung module
-    insmod /lib/modules/storage.ko
-
-# ko files for bthid
-    insmod /lib/modules/bthid.ko
 
 # Backwards Compat - XXX: Going away in G*
     symlink /mnt/sdcard /sdcard
@@ -130,13 +120,25 @@ on fs
 # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
     mount rfs /dev/block/stl9 /system check=no
-    mount ext4 /dev/block/stl9 /system noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
+    mount ext4 /dev/block/stl9 /system
     
+# ko files for vibrator
+    insmod /system/lib/modules/vibrator.ko
+
+# radio module
+    insmod /system/lib/modules/dpram_vzw.ko
+
+# samsung module
+    insmod /system/lib/modules/storage.ko
+
+# ko files for bthid
+    insmod /system/lib/modules/bthid.ko
+
 # use movinand second partition as /data. d.moskvitin
     
     mkdir /data
     mount rfs /dev/block/mmcblk0p2 /data nosuid nodev check=no
-    mount ext4 /dev/block/mmcblk0p2 /data noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
     chown system system /data
     chmod 0771 /data    
     
@@ -170,7 +172,7 @@ on post-fs
     # Same reason as /data above
     mkdir /cache
     mount rfs /dev/block/mmcblk0p1 /cache nosuid nodev check=no
-    mount ext4 /dev/block/mmcblk0p1 /cache noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p1 /cache nosuid nodev noatime nodiratime noauto_da_alloc
     chown system cache /cache
     chmod 0771 /cache
 
