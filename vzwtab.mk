@@ -48,6 +48,7 @@ PRODUCT_COPY_FILES := \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/init.rc:root/init.rc \
+	device/samsung/vzwtab/init.smdkc110.rc:root/init.smdkc110.rc \
 	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
 	device/samsung/vzwtab/lpm.rc:root/lpm.rc
 
