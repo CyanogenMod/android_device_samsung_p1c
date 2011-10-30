@@ -15,11 +15,9 @@ on init
     symlink /system/etc /etc
 
     mkdir /sdcard
-    mkdir /preload
     mkdir /system
     mkdir /data
     mkdir /cache
-    mkdir /efs
     mkdir /tmp
     mkdir /dbdata
     mkdir /mnt 0775 root root

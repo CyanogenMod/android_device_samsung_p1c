@@ -11,7 +11,6 @@ on init
     symlink /system/etc /etc
 
     mkdir /sdcard
-    mkdir /preload
     mkdir /system
     mkdir /data
     mkdir /cache
@@ -37,13 +36,8 @@ on early-fs
     mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
 
-    #temp
-    chown root root /sbin/fat.format
-    chmod 750 /sbin/fat.format
-
 on fs
     mount tmpfs tmpfs /tmp
-    #mount rfs /dev/block/stl9 /system check=no
 
 on post-fs
 

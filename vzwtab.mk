@@ -113,10 +113,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
-# extra stuff
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
-
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \

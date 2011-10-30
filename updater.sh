@@ -1,6 +1,6 @@
 #!/tmp/busybox sh
 #
-# Filsystem Conversion Script for Samsung Galaxy SL
+# Filsystem Conversion Script for Samsung VZW Galaxy Tab
 # (c) 2011 by Teamhacksung
 #
 
