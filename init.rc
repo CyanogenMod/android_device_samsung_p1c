@@ -55,6 +55,7 @@ loglevel 3
 
     mkdir /system
     mkdir /data 0771 system system
+    mkdir /dbdata 0771 system system
     mkdir /cache 0770 system cache
     mkdir /config 0500 root root
 
@@ -142,6 +143,12 @@ on fs
     chown system system /data
     chmod 0771 /data    
     
+    mkdir /dbdata
+    mount rfs /dev/block/stl10 /dbdata nosuid nodev check=no
+    mount ext4 /dev/block/stl10 /dbdata wait nosuid noatime nodiratime noauto_da_alloc
+    chown system system /dbdata
+    chmod 0771 /dbdata    
+
 on post-fs
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
@@ -229,11 +236,12 @@ on post-fs
 
     # create dalvik-cache and double-check the perms
     mkdir /data/dalvik-cache 0771 system system
-    mkdir /cache/dalvik-cache 0771 system system
+    mkdir /dbdata/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
-    chown system system /cache/dalvik-cache
+    chown system system /dbdata/dalvik-cache
     chmod 0771 /data/dalvik-cache
-    chmod 0771 /cache/dalvik-cache
+    chmod 0771 /dbdata/dalvik-cache
+    symlink /dbdata/dalvik-cache /cache/dalvik-cache
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770
