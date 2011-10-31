@@ -36,6 +36,9 @@ on early-fs
     mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
 
+    # fakeflash
+    exec /sbin/touch /init.smdkc110.rc
+
 on fs
     mount tmpfs tmpfs /tmp
 
