@@ -197,6 +197,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/vzwtab/modules/hotspot_event_monitoring.ko:system/lib/modules/hotspot_event_monitoring.ko \
     device/samsung/vzwtab/modules/dhd.ko:system/lib/modules/dhd.ko
 
+# rfs converter
+PRODUCT_COPY_FILES += \
+    device/samsung/vzwtab/prebuilt/sbin/fat.format:root/sbin/fat.format
+
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/vzwtab/kernel
 else
