@@ -167,39 +167,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# kernel modules
-# root
+# kernel modules for ramdisk
 PRODUCT_COPY_FILES += \
-    device/samsung/vzwtab/modules/fsr.ko:root/lib/modules/fsr.ko \
-    device/samsung/vzwtab/modules/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
-    device/samsung/vzwtab/modules/j4fs.ko:root/lib/modules/j4fs.ko \
-    device/samsung/vzwtab/modules/param.ko:root/lib/modules/param.ko \
-    device/samsung/vzwtab/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
-    device/samsung/vzwtab/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko
+    $(call find-copy-subdir-files,*,device/samsung/vzwtab/modules/ramdisk,root/lib/modules)
 
-#recovery
 PRODUCT_COPY_FILES += \
-    device/samsung/vzwtab/modules/fsr.ko:recovery/root/lib/modules/fsr.ko \
-    device/samsung/vzwtab/modules/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
-    device/samsung/vzwtab/modules/j4fs.ko:recovery/lib/modules/j4fs.ko \
-    device/samsung/vzwtab/modules/param.ko:recovery/lib/modules/param.ko \
-    device/samsung/vzwtab/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko \
-    device/samsung/vzwtab/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko
+    $(call find-copy-subdir-files,*,device/samsung/vzwtab/modules/ramdisk,recovery/root/lib/modules)
 
-#system
-PRODUCT_COPY_FILES += \
-    device/samsung/vzwtab/modules/bthid.ko:system/lib/modules/bthid.ko \
-    device/samsung/vzwtab/modules/storage.ko:system/lib/modules/storage.ko \
-    device/samsung/vzwtab/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-    device/samsung/vzwtab/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
-    device/samsung/vzwtab/modules/vibrator.ko:system/lib/modules/vibrator.ko \
-    device/samsung/vzwtab/modules/dpram_vzw.ko:system/lib/modules/dpram_vzw.ko \
-    device/samsung/vzwtab/modules/hotspot_event_monitoring.ko:system/lib/modules/hotspot_event_monitoring.ko \
-    device/samsung/vzwtab/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/samsung/vzwtab/modules/cifs.ko:system/lib/modules/cifs.ko \
-    device/samsung/vzwtab/modules/fuse.ko:system/lib/modules/fuse.ko \
-    device/samsung/vzwtab/modules/tun.ko:system/lib/modules/tun.ko \
-    device/samsung/vzwtab/modules/xt_TCPMSS.ko:system/lib/modules/xt_TCPMSS.ko
+# other kernel modules not in ramdisk
+PRODUCT_COPY_FILES += $(foreach module,\
+    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/vzwtab/modules/*.ko)),\
+    $(module):system/lib/modules/$(notdir $(module)))
 
 # rfs converter
 PRODUCT_COPY_FILES += \
