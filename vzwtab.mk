@@ -195,7 +195,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/vzwtab/modules/vibrator.ko:system/lib/modules/vibrator.ko \
     device/samsung/vzwtab/modules/dpram_vzw.ko:system/lib/modules/dpram_vzw.ko \
     device/samsung/vzwtab/modules/hotspot_event_monitoring.ko:system/lib/modules/hotspot_event_monitoring.ko \
-    device/samsung/vzwtab/modules/dhd.ko:system/lib/modules/dhd.ko
+    device/samsung/vzwtab/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/samsung/vzwtab/modules/cifs.ko:system/lib/modules/cifs.ko \
+    device/samsung/vzwtab/modules/fuse.ko:system/lib/modules/fuse.ko \
+    device/samsung/vzwtab/modules/tun.ko:system/lib/modules/tun.ko \
+    device/samsung/vzwtab/modules/xt_TCPMSS.ko:system/lib/modules/xt_TCPMSS.ko
 
 # rfs converter
 PRODUCT_COPY_FILES += \
