@@ -58,29 +58,14 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
 
-# These are the OpenMAX IL configuration files
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
-
-# These are the OpenMAX IL modules
-PRODUCT_PACKAGES := \
-	libSEC_OMX_Core.s5pc110 \
-	libOMX.SEC.AVC.Decoder.s5pc110 \
-	libOMX.SEC.M4V.Decoder.s5pc110 \
-	libOMX.SEC.M4V.Encoder.s5pc110 \
-	libOMX.SEC.AVC.Encoder.s5pc110
-
 # Libs
 PRODUCT_PACKAGES += \
-	libstagefrighthw \
-	overlay.s5pc110 \
 	lights.s5pc110
 
-# update utilities
 PRODUCT_PACKAGES += \
-	make_ext4fs \
-	bootmenu_busybox
+	ash \
+	audio.primary.s5pc110 \
+	audio_policy.s5pc110
 
 # apns config file
 PRODUCT_COPY_FILES += \
