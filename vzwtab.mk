@@ -58,18 +58,22 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
 
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+	make_ext4fs \
+	setup_fs
+
 # Libs
 PRODUCT_PACKAGES += \
 	lights.s5pc110
 
 PRODUCT_PACKAGES += \
-	ash \
 	audio.primary.s5pc110 \
 	audio_policy.s5pc110
 
 # apns config file
 PRODUCT_COPY_FILES += \
-        device/samsung/vzwtab/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
+	development/data/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # 3G
 PRODUCT_COPY_FILES += \
@@ -137,7 +141,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
        wifi.supplicant_scan_interval=45 \
-       dalvik.vm.heapsize=48m
+       dalvik.vm.heapsize=64m
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector

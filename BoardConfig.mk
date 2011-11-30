@@ -78,6 +78,7 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # OpenGL stuff
 BOARD_EGL_CFG := device/samsung/vzwtab/prebuilt/lib/egl/egl.cfg
+BOARD_USES_LEGACY_EGL := true
 
 # Device related defines
 BOARD_NAND_PAGE_SIZE := 4096 -s 128

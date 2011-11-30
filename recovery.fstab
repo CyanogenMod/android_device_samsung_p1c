@@ -3,9 +3,9 @@
 /boot       bml     boot
 /recovery   bml     recovery
 
-/cache      ext4    /dev/block/mmcblk0p1    NULL        rfs         NULL              rw,nosuid,nodev,check=no
-/data       ext4    /dev/block/mmcblk0p2    NULL        rfs         NULL              rw,nosuid,nodev,check=no
-/system     ext4    /dev/block/stl9         NULL        rfs         NULL              rw,check=no
-/dbdata     ext4    /dev/block/stl10        NULL        rfs         NULL              rw,check=no
-/sdcard     vfat    /dev/block/mmcblk1p1    NULL        vfat        NULL              rw,check=no
+/cache      ext4    /dev/block/stl11
+/data       ext4    /dev/block/stl10
+/system     ext4    /dev/block/stl9
+#/dbdata     ext4    /dev/block/stl10
+/sdcard     vfat    /dev/block/mmcblk1p1
 
