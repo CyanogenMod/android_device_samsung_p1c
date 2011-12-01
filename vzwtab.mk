@@ -59,7 +59,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
 
 # Filesystem management tools
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
 	make_ext4fs \
 	setup_fs
 
@@ -71,6 +71,23 @@ PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \
 	audio_policy.s5pc110
 
+# These are the OpenMAX IL configuration files
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+
+# These are the OpenMAX IL modules
+PRODUCT_PACKAGES += \
+	libSEC_OMX_Core.s5pc110 \
+	libOMX.SEC.AVC.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Encoder.s5pc110 \
+	libOMX.SEC.AVC.Encoder.s5pc110
+
+# Libs
+PRODUCT_PACKAGES += \
+	libstagefrighthw
+
 # apns config file
 PRODUCT_COPY_FILES += \
 	development/data/etc/apns-conf.xml:system/etc/apns-conf.xml
@@ -78,10 +95,6 @@ PRODUCT_COPY_FILES += \
 # 3G
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/bin/pppd_runner:system/bin/pppd_runner
-
-# WiFi
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -141,7 +154,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
        wifi.supplicant_scan_interval=45 \
-       dalvik.vm.heapsize=64m
+       dalvik.vm.heapsize=48m \
+       dalvik.vm.lockprof.threshold=500
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
