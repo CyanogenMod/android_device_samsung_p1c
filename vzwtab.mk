@@ -63,13 +63,19 @@ PRODUCT_PACKAGES := \
 	make_ext4fs \
 	setup_fs
 
-# Libs
+# Lights
 PRODUCT_PACKAGES += \
 	lights.s5pc110
 
+# Audio
 PRODUCT_PACKAGES += \
+	audio.a2dp.default \
 	audio.primary.s5pc110 \
 	audio_policy.s5pc110
+
+# Camera
+PRODUCT_PACKAGES += \
+	libs3cjpeg
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
@@ -91,10 +97,6 @@ PRODUCT_PACKAGES += \
 # apns config file
 PRODUCT_COPY_FILES += \
 	development/data/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-# 3G
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/bin/pppd_runner:system/bin/pppd_runner
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -129,8 +131,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.telephony.default_network=4 \
        ro.ril.def.agps.mode=2 \
        ro.ril.samsung_cdma=true \
-       ro.cdma.home.operator.numeric=310004 \
-       ro.cdma.home.operator.alpha=Verizon \
+       ro.cdma.home.operator.numeric=310012 \
+       ro.cdma.home.operator.alpha=VzW \
        ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
        ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
        ro.config.vc_call_vol_steps=15 \
@@ -154,7 +156,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
        wifi.supplicant_scan_interval=45 \
-       dalvik.vm.heapsize=48m \
+       dalvik.vm.heapstartsize=5m \
+       dalvik.vm.heapgrowthlimit=48m \
+       dalvik.vm.heapsize=128m \
        dalvik.vm.lockprof.threshold=500
 
 # enable Google-specific location features,
@@ -173,6 +177,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# Set default USB interface
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
 
 # kernel modules for ramdisk
 PRODUCT_COPY_FILES += \
