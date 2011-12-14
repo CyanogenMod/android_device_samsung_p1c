@@ -63,6 +63,10 @@ PRODUCT_PACKAGES := \
 	make_ext4fs \
 	setup_fs
 
+# utils
+PRODUCT_PACKAGES += \
+	bmlwrite
+
 # Lights
 PRODUCT_PACKAGES += \
 	lights.s5pc110
