@@ -80,6 +80,9 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 BOARD_EGL_CFG := device/samsung/vzwtab/prebuilt/lib/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 
+# skia
+BOARD_USE_SKIA_LCDTEXT := true
+
 # Device related defines
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_BASE := 0x32000000
