@@ -1555,7 +1555,7 @@ status_t CameraHardwareSec::setParameters(const CameraParameters& params)
             new_white = WHITE_BALANCE_SUNNY;
         else if (!strcmp(new_white_str,
                          CameraParameters::WHITE_BALANCE_CLOUDY_DAYLIGHT))
-            new_white = WHITE_BALANCE_CLOUDY;
+            new_white = WHITE_BALANCE_CLOUDY_DAYLIGHT;
         else if (!strcmp(new_white_str,
                          CameraParameters::WHITE_BALANCE_FLUORESCENT))
             new_white = WHITE_BALANCE_FLUORESCENT;
