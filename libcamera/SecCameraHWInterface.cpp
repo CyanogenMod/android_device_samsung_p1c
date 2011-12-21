@@ -154,9 +154,9 @@ void CameraHardwareSec::initDefaultParameters(int cameraId)
 
     if (cameraId == SecCamera::CAMERA_ID_BACK) {
         p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-              "720x480,640x480,352x288,176x144");
+              "1024x600,800x600,720x480,176x144");
         p.set(CameraParameters::KEY_SUPPORTED_PICTURE_SIZES,
-              "2560x1920,2048x1536,1600x1200,1280x960,640x480");
+              "2048x1536,2048x1232,1600x1200,1600x960,1024x600,800x600");
     } else {
         p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
               "640x480,320x240,176x144");
@@ -2705,7 +2705,7 @@ extern "C" {
           version_major : 1,
           version_minor : 0,
           id            : CAMERA_HARDWARE_MODULE_ID,
-          name          : "Crespo camera HAL",
+          name          : "GalaxyTab camera HAL",
           author        : "Samsung Corporation",
           methods       : &camera_module_methods,
       },

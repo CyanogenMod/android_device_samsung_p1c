@@ -80,10 +80,10 @@ namespace android {
 #error "Please define the Camera module"
 #endif
 
-#define S5K4ECGX_PREVIEW_WIDTH            720
-#define S5K4ECGX_PREVIEW_HEIGHT           480
-#define S5K4ECGX_SNAPSHOT_WIDTH           2560
-#define S5K4ECGX_SNAPSHOT_HEIGHT          1920
+#define S5K4ECGX_PREVIEW_WIDTH            1024
+#define S5K4ECGX_PREVIEW_HEIGHT           600
+#define S5K4ECGX_SNAPSHOT_WIDTH           2048
+#define S5K4ECGX_SNAPSHOT_HEIGHT          1536
 
 #define S5K4ECGX_POSTVIEW_WIDTH           640
 #define S5K4ECGX_POSTVIEW_WIDE_WIDTH      800
