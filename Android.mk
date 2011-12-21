@@ -18,8 +18,6 @@ ifeq ($(TARGET_DEVICE),vzwtab)
 
 ifneq ($(TARGET_SIMULATOR),true)
 include $(call all-makefiles-under,$(LOCAL_PATH))
-include device/samsung/aries-common/bmlutils/Android.mk
-include device/samsung/aries-common/libs3cjpeg/Android.mk
 endif
 
 endif
