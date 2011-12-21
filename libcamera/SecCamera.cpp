@@ -765,14 +765,6 @@ int SecCamera::startPreview(void)
         CHECK(ret);
     }
 
-    if (m_camera_id == CAMERA_ID_BACK) {
-        // Init some parameters
-        // Force antibanding for back camera - only value supported
-        m_anti_banding = ANTI_BANDING_50HZ;
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ANTI_BANDING, m_anti_banding);
-        CHECK(ret);
-    }
-
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
 
@@ -780,23 +772,11 @@ int SecCamera::startPreview(void)
         // More parameters
         ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FOCUS_MODE, m_params->focus_mode);
         CHECK(ret);
-        // TODO
-        m_face_detect = 0;
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FACE_DETECTION, m_face_detect);
-        CHECK(ret);
         ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SHARPNESS, m_params->sharpness);
         CHECK(ret);
         ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SATURATION, m_params->saturation);
         CHECK(ret);
         ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_CONTRAST, m_params->contrast);
-        CHECK(ret);
-        // TODO
-        m_beauty_shot = 0;
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_BEAUTY_SHOT, m_beauty_shot);
-        CHECK(ret);
-        // TODO
-        m_zoom_level = 0;
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ZOOM, m_zoom_level);
         CHECK(ret);
     }
 
@@ -812,12 +792,6 @@ int SecCamera::startPreview(void)
                                m_blur_level);
         CHECK(ret);
     }
-
-    // It is a delay for a new frame, not to show the previous bigger ugly picture frame.
-    ret = fimc_poll(&m_events_c);
-    CHECK(ret);
-    //ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_RETURN_FOCUS, 0);
-    //CHECK(ret);
 
     LOGV("%s: got the first frame of the preview\n", __func__);
 
@@ -1147,6 +1121,9 @@ int SecCamera::setSnapshotCmd(void)
 
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAM_CAPTURE, 0);
+    CHECK(ret);
+
     LOG_TIME_END(1)
 
     return 0;
