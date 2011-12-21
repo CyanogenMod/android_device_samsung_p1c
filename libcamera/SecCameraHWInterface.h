@@ -179,6 +179,7 @@ private:
     CameraParameters    mParameters;
     CameraParameters    mInternalParameters;
 
+    int                 mFrameSizeDelta;
     camera_memory_t     *mPreviewHeap;
     camera_memory_t     *mRawHeap;
     camera_memory_t     *mRecordHeap;
