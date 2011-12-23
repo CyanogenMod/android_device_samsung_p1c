@@ -68,18 +68,18 @@ on fs
 # use movinand second partition as /data. d.moskvitin
     
     mkdir /data
-    mount ext4 /dev/block/stl10 /data wait nosuid noatime nodiratime noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
     chown system system /data
     chmod 0771 /data    
     
-    #mkdir /dbdata
-    #mount ext4 /dev/block/stl10 /dbdata wait nosuid noatime nodiratime noauto_da_alloc
-    #chown system system /dbdata
-    #chmod 0771 /dbdata    
+    mkdir /dbdata
+    mount ext4 /dev/block/stl10 /dbdata wait nosuid noatime nodiratime noauto_da_alloc
+    chown system system /dbdata
+    chmod 0771 /dbdata
 
     # Same reason as /data above
     mkdir /cache
-    mount ext4 /dev/block/stl11 /cache nosuid nodev noatime nodiratime noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p1 /cache nosuid nodev noatime nodiratime noauto_da_alloc
     chown system cache /cache
     chmod 0771 /cache
 

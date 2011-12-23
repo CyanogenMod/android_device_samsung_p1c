@@ -1,3 +1,4 @@
+import /usb.rc
 on early-init
     start ueventd
 
@@ -78,3 +79,7 @@ on property:persist.service.adb.enable=1
 
 on property:persist.service.adb.enable=0
     stop adbd
+
+on property:ro.debuggable=1
+    start adbd
+
