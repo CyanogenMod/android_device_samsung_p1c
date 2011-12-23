@@ -1,4 +1,4 @@
-import init.s5pc110.usb.rc
+import init.sph-p100.usb.rc
 
 on init
 
@@ -51,7 +51,6 @@ on boot
 on fs
 # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount rfs /dev/block/stl9 /system check=no
     mount ext4 /dev/block/stl9 /system
     
 # ko files for vibrator
@@ -69,20 +68,17 @@ on fs
 # use movinand second partition as /data. d.moskvitin
     
     mkdir /data
-    mount rfs /dev/block/stl10 /data nosuid nodev check=no
     mount ext4 /dev/block/stl10 /data wait nosuid noatime nodiratime noauto_da_alloc
     chown system system /data
     chmod 0771 /data    
     
     #mkdir /dbdata
-    #mount rfs /dev/block/stl10 /dbdata nosuid nodev check=no
     #mount ext4 /dev/block/stl10 /dbdata wait nosuid noatime nodiratime noauto_da_alloc
     #chown system system /dbdata
     #chmod 0771 /dbdata    
 
     # Same reason as /data above
     mkdir /cache
-    mount rfs /dev/block/stl11 /cache nosuid nodev check=no
     mount ext4 /dev/block/stl11 /cache nosuid nodev noatime nodiratime noauto_da_alloc
     chown system cache /cache
     chmod 0771 /cache
@@ -216,7 +212,12 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled
     oneshot
 
-# end of wifi
+service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4329B1_002.002.023.0534.0571.hcd /dev/s3c2410_serial0
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service gps-daemon /system/vendor/bin/gpsd
     class late_start

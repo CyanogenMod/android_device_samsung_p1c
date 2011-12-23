@@ -47,17 +47,12 @@ PRODUCT_COPY_FILES := \
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/init.rc:root/init.rc \
 	device/samsung/vzwtab/init.smdkc110.rc:root/init.smdkc110.rc \
+	device/samsung/vzwtab/init.sph-p100.rc:root/init.sph-p100.rc \
+	device/samsung/vzwtab/init.sph-p100.usb.rc:root/init.sph-p100.usb.rc \
+	device/samsung/vzwtab/init.sph-p100.usb.rc:recovery/root/usb.rc \
 	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
 	device/samsung/vzwtab/lpm.rc:root/lpm.rc
-
-# gb init files (temp hack)
-PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/root/init:root/init \
-	device/samsung/vzwtab/prebuilt/root/init:recovery/root/init \
-	device/samsung/vzwtab/prebuilt/root/sbin/adbd:root/sbin/adbd \
-	device/samsung/vzwtab/prebuilt/root/sbin/adbd:recovery/root/sbin/adbd
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
