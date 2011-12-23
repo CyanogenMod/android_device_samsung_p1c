@@ -52,6 +52,13 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
 	device/samsung/vzwtab/lpm.rc:root/lpm.rc
 
+# gb init files (temp hack)
+PRODUCT_COPY_FILES += \
+	device/samsung/vzwtab/prebuilt/root/init:root/init \
+	device/samsung/vzwtab/prebuilt/root/init:recovery/root/init \
+	device/samsung/vzwtab/prebuilt/root/sbin/adbd:root/sbin/adbd \
+	device/samsung/vzwtab/prebuilt/root/sbin/adbd:recovery/root/sbin/adbd
+
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
