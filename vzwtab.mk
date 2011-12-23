@@ -88,16 +88,17 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
-#PRODUCT_PACKAGES += \
-#	libSEC_OMX_Core.s5pc110 \
-#	libOMX.SEC.AVC.Decoder.s5pc110 \
-#	libOMX.SEC.M4V.Decoder.s5pc110 \
-#	libOMX.SEC.M4V.Encoder.s5pc110 \
-#	libOMX.SEC.AVC.Encoder.s5pc110
+PRODUCT_PACKAGES += \
+	libSEC_OMX_Core.s5pc110 \
+	libOMX.SEC.AVC.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Decoder.s5pc110 \
+	libOMX.SEC.M4V.Encoder.s5pc110 \
+	libOMX.SEC.AVC.Encoder.s5pc110
 
 # Libs
-#PRODUCT_PACKAGES += \
-#	libstagefrighthw
+PRODUCT_PACKAGES += \
+	hwcomposer.s5pc110 \
+	libstagefrighthw
 
 # apns config file
 PRODUCT_COPY_FILES += \
