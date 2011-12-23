@@ -83,6 +83,10 @@ on fs
     chown system cache /cache
     chmod 0771 /cache
 
+    chown root input /dev/i2c-5
+    chown root input /dev/i2c-6
+    chown root input /dev/i2c-10
+
 on post-fs-data
     # create data/gps for GPS demon
     mkdir /data/gps 771 gps system
@@ -144,6 +148,10 @@ on post-fs-data
     chown system radio /sys/devices/platform/android_usb/AskOnStatus
     chown system radio /sys/devices/platform/android_usb/AskOnMenuSel
     chown system radio /sys/devices/platform/android_usb/UsbMenuSel
+
+# sensors
+    write /sys/class/input/input3/enable 1
+    write /sys/class/input/input4/enable 1
 
 # to enable wifi
      setprop wifi.interface "eth0"
