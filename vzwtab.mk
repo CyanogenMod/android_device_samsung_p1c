@@ -48,9 +48,9 @@ PRODUCT_COPY_FILES := \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/init.smdkc110.rc:root/init.smdkc110.rc \
-	device/samsung/vzwtab/init.sph-p100.rc:root/init.sph-p100.rc \
-	device/samsung/vzwtab/init.sph-p100.usb.rc:root/init.sph-p100.usb.rc \
-	device/samsung/vzwtab/init.sph-p100.usb.rc:recovery/root/usb.rc \
+	device/samsung/vzwtab/init.sch-i800.rc:root/init.sch-i800.rc \
+	device/samsung/vzwtab/init.sch-i800.usb.rc:root/init.sch-i800.usb.rc \
+	device/samsung/vzwtab/init.sch-i800.usb.rc:recovery/root/usb.rc \
 	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
 	device/samsung/vzwtab/lpm.rc:root/lpm.rc
 

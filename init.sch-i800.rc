@@ -1,4 +1,4 @@
-import init.sph-p100.usb.rc
+import init.sch-i800.usb.rc
 
 on init
 
