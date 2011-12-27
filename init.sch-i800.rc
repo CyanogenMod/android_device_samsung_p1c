@@ -56,9 +56,6 @@ on fs
 # ko files for vibrator
     insmod /system/lib/modules/vibrator.ko
 
-# radio module
-    insmod /system/lib/modules/dpram_vzw.ko
-
 # samsung module
     insmod /system/lib/modules/storage.ko
 
