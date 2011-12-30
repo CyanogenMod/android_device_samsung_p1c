@@ -93,13 +93,13 @@
 /dev/video0               0660   system     camera
 /dev/video1               0660   system     camera
 /dev/video2               0660   system     camera
-/dev/video14              0660   system     system
-/dev/video20              0660   system     system
-/dev/video21              0660   system     system
-/dev/video22              0660   system     system
+/dev/video14              0660   system     graphics
+/dev/video20              0660   system     graphics
+/dev/video21              0660   system     graphics
+/dev/video22              0660   system     graphics
 /dev/s3c-jpg              0660   system     camera
 /dev/s3c-mem              0660   system     system
-/dev/s3c-mfc              0660   system     graphics
+/dev/s3c-mfc              0660   media      media
 
 # for copybit
 /dev/pmem_gpu1            0660   system     graphics
