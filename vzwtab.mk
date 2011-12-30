@@ -51,7 +51,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vzwtab/init.sch-i800.rc:root/init.sch-i800.rc \
 	device/samsung/vzwtab/init.sch-i800.usb.rc:root/init.sch-i800.usb.rc \
 	device/samsung/vzwtab/init.sch-i800.usb.rc:recovery/root/usb.rc \
-	device/samsung/vzwtab/ueventd.rc:root/ueventd.rc \
+	device/samsung/vzwtab/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc \
 	device/samsung/vzwtab/lpm.rc:root/lpm.rc
 
 # Prebuilt kl keymaps
