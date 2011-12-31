@@ -753,11 +753,19 @@ int SecCamera::startPreview(void)
                            V4L2_CID_CAMERA_CHECK_DATALINE, m_chk_dataline);
     CHECK(ret);
 
-    if (m_camera_id == CAMERA_ID_FRONT) {
+    //if (m_camera_id == CAMERA_ID_FRONT) {
         /* VT mode setting */
         ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_VT_MODE, m_vtmode);
         CHECK(ret);
-    }
+
+        m_anti_banding = ANTI_BANDING_50HZ;
+        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ANTI_BANDING, m_anti_banding);
+        CHECK(ret);
+
+        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_CHECK_FLIP, 0);
+        CHECK(ret);
+
+    //}
 
     /* start with all buffers in queue */
     for (int i = 0; i < MAX_BUFFERS; i++) {
@@ -768,17 +776,34 @@ int SecCamera::startPreview(void)
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
 
-    if (m_camera_id == CAMERA_ID_BACK) {
-        // More parameters
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FOCUS_MODE, m_params->focus_mode);
-        CHECK(ret);
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SHARPNESS, m_params->sharpness);
-        CHECK(ret);
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SATURATION, m_params->saturation);
-        CHECK(ret);
-        ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_CONTRAST, m_params->contrast);
-        CHECK(ret);
-    }
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SCENE_MODE, m_params->scene_mode);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_WHITE_BALANCE, m_params->white_balance);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_EFFECT, m_params->effects);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FRAME_RATE, m_params->capture.timeperframe.denominator);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_METERING, m_params->metering);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SATURATION, m_params->saturation);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FOCUS_MODE, m_params->focus_mode);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_CONTRAST, m_params->contrast);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SENSOR_MODE, 0);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ISO, m_params->iso);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_BRIGHTNESS, m_params->brightness);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SHARPNESS, m_params->sharpness);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FLASH_MODE, m_params->flash_mode);
+    CHECK(ret);
+    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_APP_CHECK, 0);
+    CHECK(ret);
 
     m_flag_camera_start = 1;
 
@@ -792,6 +817,9 @@ int SecCamera::startPreview(void)
                                m_blur_level);
         CHECK(ret);
     }
+
+    ret = fimc_v4l2_g_ctrl(m_cam_fd, V4L2_CID_ESD_INT);
+    CHECK_PTR(ret);
 
     LOGV("%s: got the first frame of the preview\n", __func__);
 
@@ -1121,8 +1149,8 @@ int SecCamera::setSnapshotCmd(void)
 
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
-    ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAM_CAPTURE, 0);
-    CHECK(ret);
+    //ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAM_CAPTURE, 0);
+    //CHECK(ret);
 
     LOG_TIME_END(1)
 
