@@ -776,6 +776,8 @@ int SecCamera::startPreview(void)
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
 
+    m_flag_camera_start = 1;
+
     ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SCENE_MODE, m_params->scene_mode);
     CHECK(ret);
     ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_WHITE_BALANCE, m_params->white_balance);
@@ -804,8 +806,6 @@ int SecCamera::startPreview(void)
     CHECK(ret);
     ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_APP_CHECK, 0);
     CHECK(ret);
-
-    m_flag_camera_start = 1;
 
     ret = fimc_v4l2_s_parm(m_cam_fd, &m_streamparm);
     CHECK(ret);
@@ -1149,8 +1149,6 @@ int SecCamera::setSnapshotCmd(void)
 
     ret = fimc_v4l2_streamon(m_cam_fd);
     CHECK(ret);
-    //ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAM_CAPTURE, 0);
-    //CHECK(ret);
 
     LOG_TIME_END(1)
 
@@ -1614,12 +1612,12 @@ int SecCamera::cancelAutofocus(void)
         LOGE("ERR(%s):Camera was closed\n", __func__);
         return -1;
     }
-
+/*
     if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SET_AUTO_FOCUS, AUTO_FOCUS_OFF) < 0) {
         LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_SET_AUTO_FOCUS", __func__);
         return -1;
     }
-
+*/
     return 0;
 }
 

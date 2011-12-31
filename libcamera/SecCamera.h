@@ -43,7 +43,7 @@
 
 namespace android {
 
-#define ENABLE_ESD_PREVIEW_CHECK
+//#define ENABLE_ESD_PREVIEW_CHECK
 
 #if defined(LOG_NDEBUG) && LOG_NDEBUG == 0
 #define LOG_CAMERA LOGD
@@ -145,7 +145,7 @@ namespace android {
 
 #define BPP             2
 #define MIN(x, y)       (((x) < (y)) ? (x) : (y))
-#define MAX_BUFFERS     4 // 11
+#define MAX_BUFFERS     9 // 11
 /*
  * V 4 L 2   F I M C   E X T E N S I O N S
  *
