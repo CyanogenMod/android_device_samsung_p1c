@@ -28,9 +28,6 @@ on boot
     write /proc/sys/vm/dirty_expire_centisecs 1000
     write /proc/sys/vm/dirty_ratio 90
 
-# Include extra init file
-    import /device.rc
-
     setprop ro.build.product vzwtab
     setprop ro.product.device vzwtab
     setprop ro.radio.noril yes
@@ -84,17 +81,22 @@ on fs
     chown root input /dev/i2c-6
     chown root input /dev/i2c-10
 
-on post-fs-data
-    # create data/gps for GPS demon
-    mkdir /data/gps 771 gps system
-    chown gps system /data/gps
-    chmod 0777 /system/vendor/bin/gpsd
+#bluetooth
+    chown bluetooth bluetooth /dev/s3c2410_serial0
+    chmod 0660 /dev/s3c2410_serial0
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill1/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
-    # wi-fi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
+# System server can control backlight brightness
+    chown system system /sys/class/backlight/s5p_bl/brightness
+    chmod 0664 /sys/class/lcd/s5p_lcd/lcd_power
+    chown radio system /sys/class/lcd/s5p_lcd/lcd_power
 
-# allow system to modify cpufreq control files
+on post-fs
+    # allow system to modify cpufreq control files
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
@@ -150,6 +152,16 @@ on post-fs-data
     write /sys/class/input/input3/enable 1
     write /sys/class/input/input4/enable 1
 
+on post-fs-data
+    # create data/gps for GPS demon
+    mkdir /data/gps 771 gps system
+    chown gps system /data/gps
+    chmod 0777 /system/vendor/bin/gpsd
+
+    # wi-fi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+
 # to enable wifi
      setprop wifi.interface "eth0"
 
@@ -158,20 +170,6 @@ on post-fs-data
 
 # Run sysinit
     exec /system/bin/sysinit
-
-# System server can control backlight brightness
-    chown system system /sys/class/backlight/s5p_bl/brightness
-    chmod 0664 /sys/class/lcd/s5p_lcd/lcd_power
-    chown radio system /sys/class/lcd/s5p_lcd/lcd_power
-
-#bluetooth
-    chown bluetooth bluetooth /dev/s3c2410_serial0
-    chmod 0660 /dev/s3c2410_serial0
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill1/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
 # +++++++++++++++++++++++++++++++++++++++++++
 # for datarouter
