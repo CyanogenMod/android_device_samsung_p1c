@@ -154,7 +154,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
        net.cdma.ppp.interface=ppp0 \
        net.connectivity.type=CDMA1 \
        net.interfaces.defaultroute=cdma \
-       ro.telephony.ril_class=samsung \
+       ro.telephony.ril_class=SamsungRIL \
        mobiledata.interfaces=eth0,ppp0 \
        ro.sf.hwrotation=90
 
@@ -188,7 +188,11 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mass_storage
+
+# keep dalvik cache on /data
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dexopt-data-only=1
 
 # kernel modules for ramdisk
 PRODUCT_COPY_FILES += \

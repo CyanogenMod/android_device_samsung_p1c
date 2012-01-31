@@ -177,18 +177,6 @@ on post-fs-data
     chown system system /dev/dun
 # +++++++++++++++++++++++++++++++++++++++++++    
 
-# Samsung USB Mode : system properties are linked with sysfs
-on property:persist.service.usb.setting=0
-	write /sys/devices/platform/android_usb/UsbMenuSel 0
-on property:persist.service.usb.setting=1
-	write /sys/devices/platform/android_usb/UsbMenuSel 1
-on property:persist.service.usb.setting=2
-	write /sys/devices/platform/android_usb/UsbMenuSel 2
-on property:persist.service.usb.setting=3
-	write /sys/devices/platform/android_usb/UsbMenuSel 3
-on property:persist.service.usb.setting=4
-	write /sys/devices/platform/android_usb/UsbMenuSel 4
-
 on property:ro.debuggable=1
     start adbd
 
@@ -231,9 +219,10 @@ service gps-daemon /system/vendor/bin/gpsd
     user system
     group system inet
 
-on property:ril.cdma.data_ready=true
+on property:ril.cdma.data_state=1
     start pppd_cdma
+    setprop ril.cdma.data_state 2
 
-on property:ril.cdma.data_ready=false
+on property:ril.cdma.data_state=0
     stop pppd_cdma
 
