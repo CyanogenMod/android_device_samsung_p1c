@@ -105,6 +105,9 @@ BOARD_CUSTOM_BOOTIMG_MK := device/samsung/vzwtab/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
 
+# MTP
+BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
+
 # Asserts
 TARGET_OTA_ASSERT_DEVICE := vzwtab,SCH-I800,SPH-P100
 

@@ -45,3 +45,7 @@
 
 # for GPS
 /dev/s3c2410_serial1      0600   gps        gps
+
+# for mtp
+/dev/usb_mtp_gadget       0660   root       mtp
+
