@@ -11,13 +11,11 @@ export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
 /tmp/busybox umount -l /system
 /tmp/busybox umount -l /cache
 /tmp/busybox umount -l /data
-/tmp/busybox umount -l /dbdata
 
 # create directories
 /tmp/busybox mkdir -p /system
 /tmp/busybox mkdir -p /cache
 /tmp/busybox mkdir -p /data
-/tmp/busybox mkdir -p /dbdata
 
 # make sure sdcard is mounted
 if ! /tmp/busybox grep -q /sdcard /proc/mounts ; then
@@ -63,16 +61,9 @@ if ! /tmp/busybox mount -t ext4 /dev/block/mmcblk0p2 /data ; then
     /tmp/make_ext4fs -b 4096 -g 32768 -i 8192 -I 256 -a /data /dev/block/mmcblk0p2
 fi
 
-# format dbdata if not ext4
-if ! /tmp/busybox mount -t ext4 /dev/block/stl10 /dbdata ; then
-    /tmp/busybox umount /dbdata
-    /tmp/make_ext4fs -b 4096 -g 32768 -i 8192 -I 256 -a /dbdata /dev/block/stl10
-fi
-
 # unmount everything
 /tmp/busybox umount -l /system
 /tmp/busybox umount -l /cache
 /tmp/busybox umount -l /data
-/tmp/busybox umount -l /dbdata
 
 exit 0

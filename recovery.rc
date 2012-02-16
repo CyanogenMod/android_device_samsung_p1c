@@ -16,7 +16,6 @@ on init
     mkdir /data
     mkdir /cache
     mkdir /tmp
-    mkdir /dbdata
     mkdir /mnt 0775 root root
 
     # This may have been created by the recovery system with odd permissions
