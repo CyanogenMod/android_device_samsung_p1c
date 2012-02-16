@@ -212,4 +212,7 @@
          device is data-only. -->
     <bool name="config_voice_capable">false</bool>
 
+    <!-- Workaround for devices with broken keyboards -->
+    <bool name="config_forceDisableHardwareKeyboard">true</bool>
+
 </resources>
