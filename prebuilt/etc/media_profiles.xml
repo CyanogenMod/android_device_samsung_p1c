@@ -80,8 +80,8 @@
     <CamcorderProfiles cameraId="0">
         <EncoderProfile quality="high" fileFormat="mp4" duration="60">
             <Video codec="h264"
-                   bitRate="10000000"
-                   width="1024"
+                   bitRate="6000000"
+                   width="800"
                    height="600"
                    frameRate="30" />
 
@@ -94,8 +94,8 @@
         <EncoderProfile quality="low" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="3000000"
-                   width="800"
-                   height="600"
+                   width="720"
+                   height="480"
                    frameRate="30" />
 
             <Audio codec="aac"
