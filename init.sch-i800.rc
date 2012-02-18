@@ -42,6 +42,9 @@ on fs
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
     mount ext4 /dev/block/stl9 /system
     
+# modem
+    insmod /system/lib/modules/dpram_vzw.ko
+
 # ko files for vibrator
     insmod /system/lib/modules/vibrator.ko
 
