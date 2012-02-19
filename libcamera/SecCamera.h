@@ -43,7 +43,7 @@
 
 namespace android {
 
-//#define ENABLE_ESD_PREVIEW_CHECK
+#define ENABLE_ESD_PREVIEW_CHECK
 
 #if defined(LOG_NDEBUG) && LOG_NDEBUG == 0
 #define LOG_CAMERA LOGD
