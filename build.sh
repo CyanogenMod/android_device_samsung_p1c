@@ -5,6 +5,6 @@ cd kernel/samsung/galaxytab-cdma
 cd ../../..
 
 source build/envsetup.sh
-lunch teamhacksung_vzwtab-userdebug
+lunch cm_galaxytab7c-userdebug
 make -j4 bacon
 

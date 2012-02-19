@@ -1,5 +1,3 @@
-ifeq ($(TARGET_DEVICE),vzwtab)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -11,4 +9,3 @@ LOCAL_FORCE_STATIC_EXECUTABLE := true
 LOCAL_STATIC_LIBRARIES += libstdc++ libc
 include $(BUILD_EXECUTABLE)
 
-endif

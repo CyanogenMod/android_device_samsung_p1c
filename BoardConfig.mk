@@ -24,7 +24,7 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_LIBSECRIL_STUB := true
 
 # Use the non-open-source parts, if they're present
--include vendor/samsung/vzwtab/BoardConfigVendor.mk
+-include vendor/samsung/galaxytab7c/BoardConfigVendor.mk
 
 # ARMv7-A Cortex-A8 architecture
 TARGET_CPU_ABI := armeabi-v7a
@@ -39,7 +39,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 TARGET_PROVIDES_INIT := true
-TARGET_RECOVERY_INITRC := device/samsung/vzwtab/recovery.rc
+TARGET_RECOVERY_INITRC := device/samsung/galaxytab7c/recovery.rc
 
 TARGET_BOARD_PLATFORM := s5pc110
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
@@ -48,8 +48,8 @@ TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 TARGET_PROVIDES_LIBAUDIO := true
 
 # Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/vzwtab/releasetools/vzwtab_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/vzwtab/releasetools/vzwtab_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxytab7c/releasetools/galaxytab7c_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxytab7c/releasetools/galaxytab7c_img_from_target_files
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -76,7 +76,7 @@ BOARD_CAMERA_DEVICE := /dev/video0
 BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # OpenGL stuff
-BOARD_EGL_CFG := device/samsung/vzwtab/prebuilt/lib/egl/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxytab7c/prebuilt/lib/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 
 # skia
@@ -87,7 +87,7 @@ BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_BASE := 0x32000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
-TARGET_PREBUILT_KERNEL := device/samsung/vzwtab/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7c/kernel
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 336068608
@@ -101,7 +101,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/vzwtab/shbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7c/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
 
@@ -109,5 +109,5 @@ BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.
 BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
 
 # Asserts
-TARGET_OTA_ASSERT_DEVICE := vzwtab,SCH-I800,SPH-P100
+TARGET_OTA_ASSERT_DEVICE := galaxytab7c,SCH-I800,SPH-P100
 

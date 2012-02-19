@@ -23,15 +23,15 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/samsung/vzwtab/vzwtab.mk)
+$(call inherit-product, device/samsung/galaxytab7c/galaxytab7c.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
 # Galaxy Tab uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_vzwtab
-PRODUCT_DEVICE := vzwtab
+PRODUCT_NAME := full_galaxytab7c
+PRODUCT_DEVICE := galaxytab7c
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SCH-I800

@@ -1,6 +1,6 @@
 #!/tmp/busybox sh
 #
-# Filsystem Conversion Script for Samsung VZW Galaxy Tab
+# Filsystem Conversion Script for Samsung CDMA Galaxy Tab 7"
 # (c) 2011 by Teamhacksung
 #
 
