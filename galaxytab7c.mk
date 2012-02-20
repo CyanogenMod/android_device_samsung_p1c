@@ -139,15 +139,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.telephony.default_network=4 \
        ro.ril.def.agps.mode=2 \
        ro.ril.samsung_cdma=true \
-       ro.cdma.home.operator.numeric=310012 \
+       ro.cdma.home.operator.numeric=310004 \
        ro.cdma.home.operator.alpha=VzW \
        ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
        ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
-       ro.config.vc_call_vol_steps=15 \
        ro.cdma.otaspnumschema=SELC,3,00,07,80,87,88,99 \
-       ro.telephony.call_ring.multiple=false \
-       ro.telephony.call_ring.delay=3000 \
-       ro.telephony.call_ring.absent=true \
        net.cdma.pppd.authtype=require-chap \
        net.cdma.pppd.user=user[SPACE]VerizonWireless \
        net.cdma.datalinkinterface=/dev/ttyCDMA0 \
@@ -163,11 +159,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=45 \
-       dalvik.vm.heapstartsize=5m \
-       dalvik.vm.heapgrowthlimit=48m \
-       dalvik.vm.heapsize=128m \
-       dalvik.vm.lockprof.threshold=500
+       wifi.supplicant_scan_interval=45
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -183,8 +175,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
+# Override /proc/sys/vm/dirty_ratio on UMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=20
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# dalvik
+include frameworks/base/build/phone-hdpi-512-dalvik-heap.mk
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
