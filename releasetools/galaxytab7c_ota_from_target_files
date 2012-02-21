@@ -22,7 +22,6 @@ LOCAL_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file_
 RELEASETOOLS_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../build/tools/releasetools'))
 TARGET_DIR = os.getenv('OUT')
 UTILITIES_DIR = os.path.join(TARGET_DIR, 'utilities')
-OPT_EXECUTABLES_DIR = os.path.join(TARGET_DIR, 'system/xbin')
 
 # Add releasetools directory to python path
 sys.path.append(RELEASETOOLS_DIR)
@@ -40,12 +39,15 @@ __doc__ = ota_from_target_files.__doc__
 def CopyBootFiles(input_zip, output_zip):
     output_zip.write(os.path.join(TARGET_DIR, "boot.img"),"boot.img")
 
-def CopyUpdaterFiles(output_zip):
-  """Copy some utilities needed for updater."""
+def CopyBMLoverMTD(output_zip):
+  """Copy the bml_over_mtd utility and script to the output."""
   output_zip.write(os.path.join(UTILITIES_DIR, "make_ext4fs"),"make_ext4fs")
   output_zip.write(os.path.join(UTILITIES_DIR, "busybox"),"busybox")
-  output_zip.write(os.path.join(LOCAL_DIR, "updater.sh"),"updater.sh")
-  output_zip.write(os.path.join(OPT_EXECUTABLES_DIR, "bmlwrite"),"bmlwrite")
+  output_zip.write(os.path.join(UTILITIES_DIR, "flash_image"),"flash_image")
+  output_zip.write(os.path.join(UTILITIES_DIR, "erase_image"),"erase_image")
+  output_zip.write(os.path.join(UTILITIES_DIR, "bml_over_mtd"),"bml_over_mtd")
+  output_zip.write(os.path.join(LOCAL_DIR, "bml_over_mtd.sh"),"bml_over_mtd.sh")
+  output_zip.write(os.path.join(TARGET_DIR, "updater.sh"),"updater.sh")
 
 def WriteFullOTAPackage(input_zip, output_zip):
   # TODO: how to determine this?  We don't know what version it will
@@ -83,14 +85,18 @@ def WriteFullOTAPackage(input_zip, output_zip):
   (symlinks, retouch_files) = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
-  CopyBootFiles(input_zip, output_zip)
-  CopyUpdaterFiles(output_zip)
+  if OPTIONS.aslr_mode:
+    script.RetouchBinaries(retouch_files)
+  else:
+    script.UndoRetouchBinaries(retouch_files)
 
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
   script.ShowProgress(0.2, 0)
   script.ShowProgress(0.1, 0)
+  CopyBootFiles(input_zip, output_zip)
+  CopyBMLoverMTD(output_zip)
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:

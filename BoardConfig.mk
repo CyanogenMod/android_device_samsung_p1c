@@ -90,7 +90,7 @@ BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
 TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7c/kernel
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 336068608
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 262144000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1319108608
 BOARD_FLASH_BLOCK_SIZE := 4096
 
@@ -104,6 +104,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7c/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
+BOARD_USES_BML_OVER_MTD := true
 
 # MTP
 BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"

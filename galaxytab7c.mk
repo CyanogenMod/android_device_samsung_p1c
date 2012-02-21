@@ -63,11 +63,8 @@ PRODUCT_COPY_FILES += \
 # Filesystem management tools
 PRODUCT_PACKAGES := \
 	make_ext4fs \
-	setup_fs
-
-# utils
-PRODUCT_PACKAGES += \
-	bmlwrite
+	setup_fs \
+	bml_over_mtd
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -193,21 +190,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1
 
-# kernel modules for ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/galaxytab7c/modules/ramdisk,root/lib/modules)
-
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/galaxytab7c/modules/ramdisk,recovery/root/lib/modules)
-
 # other kernel modules not in ramdisk
 PRODUCT_COPY_FILES += $(foreach module,\
     $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/galaxytab7c/modules/*.ko)),\
     $(module):system/lib/modules/$(notdir $(module)))
-
-# rfs converter
-PRODUCT_COPY_FILES += \
-    device/samsung/galaxytab7c/prebuilt/sbin/fat.format:root/sbin/fat.format
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/galaxytab7c/kernel

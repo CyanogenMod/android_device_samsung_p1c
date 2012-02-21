@@ -23,7 +23,8 @@ import edify_generator
 class EdifyGenerator(edify_generator.EdifyGenerator):
     def AssertDevice(self, device):
       edify_generator.EdifyGenerator.AssertDevice(self, device)
-      self.script.append('ui_print("Checking state of RFS/EXT4...");')
+      self.script.append('show_progress(0.15, 5);');
+      self.script.append('ui_print("Checking state of BML/MTD...");')
       self.script.append(
             ('package_extract_file("updater.sh", "/tmp/updater.sh");\n'
              'set_perm(0, 0, 0777, "/tmp/updater.sh");'))
@@ -34,13 +35,36 @@ class EdifyGenerator(edify_generator.EdifyGenerator):
             ('package_extract_file("busybox", "/tmp/busybox");\n'
              'set_perm(0, 0, 0777, "/tmp/busybox");'))
       self.script.append(
-            ('package_extract_file("bmlwrite", "/tmp/bmlwrite");\n'
-             'set_perm(0, 0, 0777, "/tmp/bmlwrite");'))
+            ('package_extract_file("flash_image", "/tmp/flash_image");\n'
+             'set_perm(0, 0, 0777, "/tmp/flash_image");'))
+      self.script.append(
+            ('package_extract_file("erase_image", "/tmp/erase_image");\n'
+             'set_perm(0, 0, 0777, "/tmp/erase_image");'))
+      self.script.append(
+            ('package_extract_file("bml_over_mtd", "/tmp/bml_over_mtd");\n'
+             'set_perm(0, 0, 0777, "/tmp/bml_over_mtd");'))
+      self.script.append(
+            ('package_extract_file("bml_over_mtd.sh", "/tmp/bml_over_mtd.sh");\n'
+             'set_perm(0, 0, 0777, "/tmp/bml_over_mtd.sh");'))
+
       self.script.append('package_extract_file("boot.img", "/tmp/boot.img");')
       self.script.append('assert(run_program("/tmp/updater.sh") == 0);')
-      self.script.append('ui_print("Formatting of EXT4 complete...");')
+      self.script.append('ui_print("Formatting of MTD complete...");')
       self.script.append('ui_print("Installing system...");')
 
     def RunBackup(self, command):
       edify_generator.EdifyGenerator.RunBackup(self, command)
+
+    def WriteBMLoverMTD(self, partition, partition_start_block, reservoirpartition, reservoir_start_block, image):
+      """Write the given package file into the given partition."""
+
+      args = {'partition': partition, 'partition_start_block': partition_start_block, 'reservoirpartition': reservoirpartition, 'reservoir_start_block': reservoir_start_block, 'image': image}
+
+      self.script.append(
+            ('assert(run_program("/tmp/erase_image", "%(partition)s"));') % args)
+
+      self.script.append(
+            ('assert(package_extract_file("%(image)s", "/tmp/%(partition)s.img"),\n'
+             '       run_program("/tmp/bml_over_mtd.sh", "%(partition)s", "%(partition_start_block)s", "%(reservoirpartition)s", "%(reservoir_start_block)s", "/tmp/%(partition)s.img"),\n'
+             '       delete("/tmp/%(partition)s.img"));') % args)
 
