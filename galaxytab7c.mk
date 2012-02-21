@@ -43,7 +43,8 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/galaxytab7c/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
 	device/samsung/galaxytab7c/prebuilt/etc/asound.conf:system/etc/asound.conf \
-	device/samsung/galaxytab7c/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/galaxytab7c/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
+	device/samsung/galaxytab7c/prebuilt/etc/bluetooth/main.conf:system/etc/bluetooth/main.conf
 
 # Init files
 PRODUCT_COPY_FILES += \

@@ -26,6 +26,8 @@ on boot
     chmod 660 /dev/i2c-1
 
 on fs
+    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
+
 # modem
     insmod /system/lib/modules/dpram_vzw.ko
 
@@ -37,11 +39,6 @@ on fs
 
 # ko files for bthid
     insmod /system/lib/modules/bthid.ko
-
-    mkdir /data
-    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
-    chown system system /data
-    chmod 0771 /data
 
 #bluetooth
     chown bluetooth bluetooth /dev/s3c2410_serial0
@@ -113,7 +110,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4329B1_002.002.023.0534.0571.hcd /dev/s3c2410_serial0
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4329B1_002.002.023.0534.0571.hcd /dev/s3c2410_serial0
     class main
     user bluetooth
     group bluetooth net_bt_admin
