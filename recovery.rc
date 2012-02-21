@@ -24,9 +24,6 @@ on init
 
 on early-fs
 
-    # fakeflash
-    exec /sbin/touch /init.smdkc110.rc
-
 on fs
     mount tmpfs tmpfs /tmp
 

@@ -48,7 +48,6 @@ PRODUCT_COPY_FILES := \
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/galaxytab7c/init.smdkc110.rc:root/init.smdkc110.rc \
 	device/samsung/galaxytab7c/init.sch-i800.rc:root/init.sch-i800.rc \
 	device/samsung/galaxytab7c/init.sch-i800.usb.rc:root/init.sch-i800.usb.rc \
 	device/samsung/galaxytab7c/init.sch-i800.usb.rc:recovery/root/usb.rc \
