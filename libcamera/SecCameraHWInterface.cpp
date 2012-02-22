@@ -282,7 +282,7 @@ void CameraHardwareSec::initDefaultParameters(int cameraId)
         p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FPS_RANGE, "(15000,30000)");
         p.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "15000,30000");
 
-        p.set(CameraParameters::KEY_FOCAL_LENGTH, "3.43");
+        p.set(CameraParameters::KEY_FOCAL_LENGTH, "2.78");
     } else {
         p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FPS_RANGE, "(7500,30000)");
         p.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "7500,30000");
