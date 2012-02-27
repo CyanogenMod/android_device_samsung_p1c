@@ -1135,13 +1135,6 @@ int CameraHardwareSec::pictureThread()
     }
 
     if (mMsgEnabled & CAMERA_MSG_COMPRESSED_IMAGE) {
-        if (mSecCamera->getCameraId() == SecCamera::CAMERA_ID_BACK) {
-            // Aries' back camera already has EXIF data
-            camera_memory_t *mem = mGetMemoryCb(-1, JpegImageSize, 1, 0);
-            memcpy(mem->data, JpegHeap->data, JpegImageSize);
-            mDataCb(CAMERA_MSG_COMPRESSED_IMAGE, mem, 0, NULL, mCallbackCookie);
-            mem->release(mem);
-        } else {
             camera_memory_t *ExifHeap =
                 mGetMemoryCb(-1, EXIF_FILE_SIZE + JPG_STREAM_BUF_SIZE, 1, 0);
             JpegExifSize = mSecCamera->getExif((unsigned char *)ExifHeap->data,
@@ -1163,7 +1156,6 @@ int CameraHardwareSec::pictureThread()
             mDataCb(CAMERA_MSG_COMPRESSED_IMAGE, mem, 0, NULL, mCallbackCookie);
             mem->release(mem);
             ExifHeap->release(ExifHeap);
-        }
     }
 
     LOG_TIME_END(0)
