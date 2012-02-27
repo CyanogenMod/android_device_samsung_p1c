@@ -543,28 +543,14 @@ SecCamera::SecCamera() :
             m_snapshot_max_width  (MAX_BACK_CAMERA_SNAPSHOT_WIDTH),
             m_snapshot_max_height (MAX_BACK_CAMERA_SNAPSHOT_HEIGHT),
             m_angle(-1),
-            m_anti_banding(-1),
-            m_wdr(-1),
-            m_anti_shake(-1),
             m_zoom_level(-1),
             m_object_tracking(-1),
-            m_smart_auto(-1),
-            m_beauty_shot(-1),
-            m_vintage_mode(-1),
-            m_face_detect(-1),
-            m_gps_enabled(false),
-            m_gps_latitude(-1),
-            m_gps_longitude(-1),
-            m_gps_altitude(-1),
-            m_gps_timestamp(-1),
             m_vtmode(0),
             m_sensor_mode(-1),
             m_shot_mode(-1),
             m_exif_orientation(-1),
             m_blur_level(-1),
             m_chk_dataline(-1),
-            m_video_gamma(-1),
-            m_slow_ae(-1),
             m_camera_af_flag(-1),
             m_flag_camera_start(0),
             m_jpeg_thumbnail_width (0),
@@ -1646,55 +1632,6 @@ int SecCamera::zoomOut(void)
 
 // -----------------------------------
 
-int SecCamera::SetRotate(int angle)
-{
-    LOGE("%s(angle(%d))", __func__, angle);
-
-    if (m_angle != angle) {
-        switch (angle) {
-        case -360:
-        case    0:
-        case  360:
-            m_angle = 0;
-            break;
-
-        case -270:
-        case   90:
-            m_angle = 90;
-            break;
-
-        case -180:
-        case  180:
-            m_angle = 180;
-            break;
-
-        case  -90:
-        case  270:
-            m_angle = 270;
-            break;
-
-        default:
-            LOGE("ERR(%s):Invalid angle(%d)", __func__, angle);
-            return -1;
-        }
-
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_ROTATION, angle) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_ROTATION", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getRotate(void)
-{
-    LOGV("%s : angle(%d)", __func__, m_angle);
-    return m_angle;
-}
-
 int SecCamera::setFrameRate(int frame_rate)
 {
     LOGV("%s(FrameRate(%d))", __func__, frame_rate);
@@ -1841,29 +1778,6 @@ int SecCamera::getImageEffect(void)
 {
     LOGV("%s : image_effect(%d)", __func__, m_params->effects);
     return m_params->effects;
-}
-
-// ======================================================================
-int SecCamera::setAntiBanding(int anti_banding)
-{
-    LOGV("%s(anti_banding(%d))", __func__, anti_banding);
-
-    if (anti_banding < ANTI_BANDING_AUTO || ANTI_BANDING_OFF < anti_banding) {
-        LOGE("ERR(%s):Invalid anti_banding (%d)", __func__, anti_banding);
-        return -1;
-    }
-
-    if (m_anti_banding != anti_banding) {
-        m_anti_banding = anti_banding;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ANTI_BANDING, anti_banding) < 0) {
-                 LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_ANTI_BANDING", __func__);
-                 return -1;
-            }
-        }
-    }
-
-    return 0;
 }
 
 //======================================================================
@@ -2040,65 +1954,6 @@ int SecCamera::getSharpness(void)
 
 //======================================================================
 
-int SecCamera::setWDR(int wdr_value)
-{
-    LOGV("%s(wdr_value(%d))", __func__, wdr_value);
-
-    if (wdr_value < WDR_OFF || WDR_MAX <= wdr_value) {
-        LOGE("ERR(%s):Invalid wdr_value (%d)", __func__, wdr_value);
-        return -1;
-    }
-
-    if (m_wdr != wdr_value) {
-        m_wdr = wdr_value;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_WDR, wdr_value) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_WDR", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getWDR(void)
-{
-    return m_wdr;
-}
-
-//======================================================================
-
-int SecCamera::setAntiShake(int anti_shake)
-{
-    LOGV("%s(anti_shake(%d))", __func__, anti_shake);
-
-    if (anti_shake < ANTI_SHAKE_OFF || ANTI_SHAKE_MAX <= anti_shake) {
-        LOGE("ERR(%s):Invalid anti_shake (%d)", __func__, anti_shake);
-        return -1;
-    }
-
-    if (m_anti_shake != anti_shake) {
-        m_anti_shake = anti_shake;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_ANTI_SHAKE, anti_shake) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_ANTI_SHAKE", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getAntiShake(void)
-{
-    return m_anti_shake;
-}
-
-//======================================================================
-
-
 int SecCamera::setMetering(int metering_value)
 {
     LOGV("%s(metering (%d))", __func__, metering_value);
@@ -2246,110 +2101,6 @@ int SecCamera::setTouchAFStartStop(int start_stop)
 
 //======================================================================
 
-int SecCamera::setSmartAuto(int smart_auto)
-{
-    LOGV("%s(smart_auto (%d))", __func__, smart_auto);
-
-    if (smart_auto < SMART_AUTO_OFF || SMART_AUTO_MAX <= smart_auto) {
-        LOGE("ERR(%s):Invalid smart_auto (%d)", __func__, smart_auto);
-        return -1;
-    }
-
-    if (m_smart_auto != smart_auto) {
-        m_smart_auto = smart_auto;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SMART_AUTO, smart_auto) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_SMART_AUTO", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getSmartAuto(void)
-{
-    return m_smart_auto;
-}
-
-int SecCamera::getAutosceneStatus(void)
-{
-    int autoscene_status = -1;
-
-    if (getSmartAuto() == SMART_AUTO_ON) {
-        autoscene_status = fimc_v4l2_g_ctrl(m_cam_fd, V4L2_CID_CAMERA_SMART_AUTO_STATUS);
-
-        if ((autoscene_status < SMART_AUTO_STATUS_AUTO) || (autoscene_status > SMART_AUTO_STATUS_MAX)) {
-            LOGE("ERR(%s):Invalid getAutosceneStatus (%d)", __func__, autoscene_status);
-            return -1;
-        }
-    }
-    //LOGV("%s :    autoscene_status (%d)", __func__, autoscene_status);
-    return autoscene_status;
-}
-//======================================================================
-
-int SecCamera::setBeautyShot(int beauty_shot)
-{
-    LOGV("%s(beauty_shot (%d))", __func__, beauty_shot);
-
-    if (beauty_shot < BEAUTY_SHOT_OFF || BEAUTY_SHOT_MAX <= beauty_shot) {
-        LOGE("ERR(%s):Invalid beauty_shot (%d)", __func__, beauty_shot);
-        return -1;
-    }
-
-    if (m_beauty_shot != beauty_shot) {
-        m_beauty_shot = beauty_shot;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_BEAUTY_SHOT, beauty_shot) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_BEAUTY_SHOT", __func__);
-                return -1;
-            }
-        }
-
-        setFaceDetect(FACE_DETECTION_ON_BEAUTY);
-    }
-
-    return 0;
-}
-
-int SecCamera::getBeautyShot(void)
-{
-    return m_beauty_shot;
-}
-
-//======================================================================
-
-int SecCamera::setVintageMode(int vintage_mode)
-{
-    LOGV("%s(vintage_mode(%d))", __func__, vintage_mode);
-
-    if (vintage_mode <= VINTAGE_MODE_BASE || VINTAGE_MODE_MAX <= vintage_mode) {
-        LOGE("ERR(%s):Invalid vintage_mode (%d)", __func__, vintage_mode);
-        return -1;
-    }
-
-    if (m_vintage_mode != vintage_mode) {
-        m_vintage_mode = vintage_mode;
-        if (m_flag_camera_start) {
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_VINTAGE_MODE, vintage_mode) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_VINTAGE_MODE", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getVintageMode(void)
-{
-    return m_vintage_mode;
-}
-
-//======================================================================
-
 int SecCamera::setFocusMode(int focus_mode)
 {
     LOGV("%s(focus_mode(%d))", __func__, focus_mode);
@@ -2380,115 +2131,6 @@ int SecCamera::getFocusMode(void)
 
 //======================================================================
 
-int SecCamera::setFaceDetect(int face_detect)
-{
-    LOGV("%s(face_detect(%d))", __func__, face_detect);
-
-    if (m_face_detect != face_detect) {
-        m_face_detect = face_detect;
-        if (m_flag_camera_start) {
-            if (m_face_detect != FACE_DETECTION_OFF) {
-                if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FOCUS_MODE, FOCUS_MODE_AUTO) < 0) {
-                    LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_FOCUS_MODin face detecion", __func__);
-                    return -1;
-                }
-            }
-            if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FACE_DETECTION, face_detect) < 0) {
-                LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_FACE_DETECTION", __func__);
-                return -1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-int SecCamera::getFaceDetect(void)
-{
-    return m_face_detect;
-}
-
-//======================================================================
-
-int SecCamera::setGPSLatitude(const char *gps_latitude)
-{
-    LOGV("%s(gps_latitude(%s))", __func__, gps_latitude);
-    if (gps_latitude == NULL)
-        m_gps_enabled = false;
-    else {
-        m_gps_enabled = true;
-        m_gps_latitude = lround(strtod(gps_latitude, NULL) * 10000000);
-    }
-
-    LOGV("%s(m_gps_latitude(%ld))", __func__, m_gps_latitude);
-    return 0;
-}
-
-int SecCamera::setGPSLongitude(const char *gps_longitude)
-{
-    LOGV("%s(gps_longitude(%s))", __func__, gps_longitude);
-    if (gps_longitude == NULL)
-        m_gps_enabled = false;
-    else {
-        m_gps_enabled = true;
-        m_gps_longitude = lround(strtod(gps_longitude, NULL) * 10000000);
-    }
-
-    LOGV("%s(m_gps_longitude(%ld))", __func__, m_gps_longitude);
-    return 0;
-}
-
-int SecCamera::setGPSAltitude(const char *gps_altitude)
-{
-    LOGV("%s(gps_altitude(%s))", __func__, gps_altitude);
-    if (gps_altitude == NULL)
-        m_gps_altitude = 0;
-    else {
-        m_gps_altitude = lround(strtod(gps_altitude, NULL) * 100);
-    }
-
-    LOGV("%s(m_gps_altitude(%ld))", __func__, m_gps_altitude);
-    return 0;
-}
-
-int SecCamera::setGPSTimeStamp(const char *gps_timestamp)
-{
-    LOGV("%s(gps_timestamp(%s))", __func__, gps_timestamp);
-    if (gps_timestamp == NULL)
-        m_gps_timestamp = 0;
-    else
-        m_gps_timestamp = atol(gps_timestamp);
-
-    LOGV("%s(m_gps_timestamp(%ld))", __func__, m_gps_timestamp);
-    return 0;
-}
-
-int SecCamera::setGPSProcessingMethod(const char *gps_processing_method)
-{
-    LOGV("%s(gps_processing_method(%s))", __func__, gps_processing_method);
-    memset(mExifInfo.gps_processing_method, 0, sizeof(mExifInfo.gps_processing_method));
-    if (gps_processing_method != NULL) {
-        size_t len = strlen(gps_processing_method);
-        if (len > sizeof(mExifInfo.gps_processing_method)) {
-            len = sizeof(mExifInfo.gps_processing_method);
-        }
-        memcpy(mExifInfo.gps_processing_method, gps_processing_method, len);
-    }
-    return 0;
-}
-
-int SecCamera::setFaceDetectLockUnlock(int facedetect_lockunlock)
-{
-    LOGV("%s(facedetect_lockunlock(%d))", __func__, facedetect_lockunlock);
-
-    if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FACEDETECT_LOCKUNLOCK, facedetect_lockunlock) < 0) {
-        LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_FACEDETECT_LOCKUNLOCK", __func__);
-        return -1;
-    }
-
-    return 0;
-}
-
 int SecCamera::setObjectPosition(int x, int y)
 {
     LOGV("%s(setObjectPosition(x=%d, y=%d))", __func__, x, y);
@@ -2507,54 +2149,6 @@ int SecCamera::setObjectPosition(int x, int y)
     }
 
     return 0;
-}
-
-//======================================================================
-
-int SecCamera::setGamma(int gamma)
-{
-     LOGV("%s(gamma(%d))", __func__, gamma);
-
-     if (gamma < GAMMA_OFF || GAMMA_MAX <= gamma) {
-         LOGE("ERR(%s):Invalid gamma (%d)", __func__, gamma);
-         return -1;
-     }
-
-     if (m_video_gamma != gamma) {
-         m_video_gamma = gamma;
-         if (m_flag_camera_start) {
-             if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SET_GAMMA, gamma) < 0) {
-                 LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_SET_GAMMA", __func__);
-                 return -1;
-             }
-         }
-     }
-
-     return 0;
-}
-
-//======================================================================
-
-int SecCamera::setSlowAE(int slow_ae)
-{
-     LOGV("%s(slow_ae(%d))", __func__, slow_ae);
-
-     if (slow_ae < GAMMA_OFF || GAMMA_MAX <= slow_ae) {
-         LOGE("ERR(%s):Invalid slow_ae (%d)", __func__, slow_ae);
-         return -1;
-     }
-
-     if (m_slow_ae!= slow_ae) {
-         m_slow_ae = slow_ae;
-         if (m_flag_camera_start) {
-             if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_SET_SLOW_AE, slow_ae) < 0) {
-                 LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_SET_SLOW_AE", __func__);
-                 return -1;
-             }
-         }
-     }
-
-     return 0;
 }
 
 //======================================================================
@@ -2581,19 +2175,6 @@ int SecCamera::setExifOrientationInfo(int orientationInfo)
      m_exif_orientation = orientationInfo;
 
      return 0;
-}
-
-//======================================================================
-int SecCamera::setBatchReflection()
-{
-    if (m_flag_camera_start) {
-        if (fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_BATCH_REFLECTION, 1) < 0) {
-             LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_BATCH_REFLECTION", __func__);
-             return -1;
-        }
-    }
-
-    return 0;
 }
 
 /*Video call*/
@@ -2807,10 +2388,6 @@ void SecCamera::setExifFixedAttribute()
     //3 Exposure Mode
     mExifInfo.exposure_mode = EXIF_DEF_EXPOSURE_MODE;
 
-    //2 0th IFD GPS Info Tags
-    unsigned char gps_version[4] = { 0x02, 0x02, 0x00, 0x00 };
-    memcpy(mExifInfo.gps_version_id, gps_version, sizeof(gps_version));
-
     //2 1th IFD TIFF Tags
     mExifInfo.compression_scheme = EXIF_DEF_COMPRESSION;
     mExifInfo.x_resolution.num = EXIF_DEF_RESOLUTION_NUM;
@@ -2967,56 +2544,6 @@ void SecCamera::setExifChangedAttribute()
     default:
         mExifInfo.scene_capture_type = EXIF_SCENE_STANDARD;
         break;
-    }
-
-    //2 0th IFD GPS Info Tags
-    if (m_gps_enabled) {
-        if (m_gps_latitude >= 0)
-            strcpy((char *)mExifInfo.gps_latitude_ref, "N");
-        else
-            strcpy((char *)mExifInfo.gps_latitude_ref, "S");
-
-        if (m_gps_longitude >= 0)
-            strcpy((char *)mExifInfo.gps_longitude_ref, "E");
-        else
-            strcpy((char *)mExifInfo.gps_longitude_ref, "W");
-
-        if (m_gps_altitude >= 0)
-            mExifInfo.gps_altitude_ref = 0;
-        else
-            mExifInfo.gps_altitude_ref = 1;
-
-        mExifInfo.gps_latitude[0].num = (uint32_t)labs(m_gps_latitude);
-        mExifInfo.gps_latitude[0].den = 10000000;
-        mExifInfo.gps_latitude[1].num = 0;
-        mExifInfo.gps_latitude[1].den = 1;
-        mExifInfo.gps_latitude[2].num = 0;
-        mExifInfo.gps_latitude[2].den = 1;
-
-        mExifInfo.gps_longitude[0].num = (uint32_t)labs(m_gps_longitude);
-        mExifInfo.gps_longitude[0].den = 10000000;
-        mExifInfo.gps_longitude[1].num = 0;
-        mExifInfo.gps_longitude[1].den = 1;
-        mExifInfo.gps_longitude[2].num = 0;
-        mExifInfo.gps_longitude[2].den = 1;
-
-        mExifInfo.gps_altitude.num = (uint32_t)labs(m_gps_altitude);
-        mExifInfo.gps_altitude.den = 100;
-
-        struct tm tm_data;
-        gmtime_r(&m_gps_timestamp, &tm_data);
-        mExifInfo.gps_timestamp[0].num = tm_data.tm_hour;
-        mExifInfo.gps_timestamp[0].den = 1;
-        mExifInfo.gps_timestamp[1].num = tm_data.tm_min;
-        mExifInfo.gps_timestamp[1].den = 1;
-        mExifInfo.gps_timestamp[2].num = tm_data.tm_sec;
-        mExifInfo.gps_timestamp[2].den = 1;
-        snprintf((char*)mExifInfo.gps_datestamp, sizeof(mExifInfo.gps_datestamp),
-                "%04d:%02d:%02d", tm_data.tm_year + 1900, tm_data.tm_mon + 1, tm_data.tm_mday);
-
-        mExifInfo.enableGps = true;
-    } else {
-        mExifInfo.enableGps = false;
     }
 
     //2 1th IFD TIFF Tags

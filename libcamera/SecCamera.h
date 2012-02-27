@@ -94,8 +94,8 @@ namespace android {
 #define S5K4ECGX_THUMBNAIL_HEIGHT         240
 #define S5K4ECGX_THUMBNAIL_BPP            16
 
-/* focal length of 3.43mm */
-#define S5K4ECGX_FOCAL_LENGTH             343
+/* focal length of 2.78mm */
+#define S5K4ECGX_FOCAL_LENGTH             278
 
 #define VGA_PREVIEW_WIDTH               640
 #define VGA_PREVIEW_HEIGHT              480
@@ -251,25 +251,6 @@ public:
 
     int m_touch_af_start_stop;
 
-    struct gps_info_latiude {
-        unsigned int    north_south;
-        unsigned int    dgree;
-        unsigned int    minute;
-        unsigned int    second;
-    } gpsInfoLatitude;
-    struct gps_info_longitude {
-        unsigned int    east_west;
-        unsigned int    dgree;
-        unsigned int    minute;
-        unsigned int    second;
-    } gpsInfoLongitude;
-    struct gps_info_altitude {
-        unsigned int    plus_minus;
-        unsigned int    dgree;
-        unsigned int    minute;
-        unsigned int    second;
-    } gpsInfoAltitude;
-
     SecCamera();
     virtual ~SecCamera();
 
@@ -317,9 +298,6 @@ public:
     int             zoomIn(void);
     int             zoomOut(void);
 
-    int             SetRotate(int angle);
-    int             getRotate(void);
-
     int             setVerticalMirror(void);
     int             setHorizontalMirror(void);
 
@@ -353,12 +331,6 @@ public:
     int             setSharpness(int sharpness_value);
     int             getSharpness(void);
 
-    int             setWDR(int wdr_value);
-    int             getWDR(void);
-
-    int             setAntiShake(int anti_shake);
-    int             getAntiShake(void);
-
     int             setJpegQuality(int jpeg_qality);
     int             getJpegQuality(void);
 
@@ -369,41 +341,19 @@ public:
     int             getObjectTracking(void);
     int             getObjectTrackingStatus(void);
 
-    int             setSmartAuto(int smart_auto);
-    int             getSmartAuto(void);
     int             getAutosceneStatus(void);
-
-    int             setBeautyShot(int beauty_shot);
-    int             getBeautyShot(void);
-
-    int             setVintageMode(int vintage_mode);
-    int             getVintageMode(void);
 
     int             setFocusMode(int focus_mode);
     int             getFocusMode(void);
 
-    int             setFaceDetect(int face_detect);
-    int             getFaceDetect(void);
-
-    int             setGPSLatitude(const char *gps_latitude);
-    int             setGPSLongitude(const char *gps_longitude);
-    int             setGPSAltitude(const char *gps_altitude);
-    int             setGPSTimeStamp(const char *gps_timestamp);
-    int             setGPSProcessingMethod(const char *gps_timestamp);
     int             cancelAutofocus(void);
-    int             setFaceDetectLockUnlock(int facedetect_lockunlock);
     int             setObjectPosition(int x, int y);
     int             setObjectTrackingStartStop(int start_stop);
     int             setTouchAFStartStop(int start_stop);
-    int             setCAFStatus(int on_off);
     int             getAutoFocusResult(void);
-    int             setAntiBanding(int anti_banding);
     int             getPostview(void);
     int             setRecordingSize(int width, int height);
-    int             setGamma(int gamma);
-    int             setSlowAE(int slow_ae);
     int             setExifOrientationInfo(int orientationInfo);
-    int             setBatchReflection(void);
     int             setSnapshotCmd(void);
     int             endSnapshot(void);
     int             setCameraSensorReset(void);
@@ -503,32 +453,17 @@ private:
     int             m_snapshot_max_height;
 
     int             m_angle;
-    int             m_anti_banding;
-    int             m_wdr;
-    int             m_anti_shake;
     int             m_zoom_level;
     int             m_object_tracking;
-    int             m_smart_auto;
-    int             m_beauty_shot;
-    int             m_vintage_mode;
-    int             m_face_detect;
     int             m_object_tracking_start_stop;
     int             m_recording_width;
     int             m_recording_height;
-    bool            m_gps_enabled;
-    long            m_gps_latitude;  /* degrees * 1e7 */
-    long            m_gps_longitude; /* degrees * 1e7 */
-    long            m_gps_altitude;  /* metres * 100 */
-    long            m_gps_timestamp;
     int             m_vtmode;
     int             m_sensor_mode; /*Camcorder fix fps */
     int             m_shot_mode; /* Shot mode */
     int             m_exif_orientation;
     int             m_blur_level;
     int             m_chk_dataline;
-    int             m_video_gamma;
-    int             m_slow_ae;
-    int             m_caf_on_off;
     int             m_default_imei;
     int             m_camera_af_flag;
 

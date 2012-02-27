@@ -322,7 +322,6 @@ void CameraHardwareSec::initDefaultParameters(int cameraId)
     ip.set("iso", "auto");
     ip.set("metering", "center");
 
-    ip.set("wdr", 0);
     ip.set("chk_dataline", 0);
     if (cameraId == SecCamera::CAMERA_ID_FRONT) {
         ip.set("vtmode", 0);
@@ -1828,95 +1827,6 @@ status_t CameraHardwareSec::setParameters(const CameraParameters& params)
         }
     }
 
-    //WDR
-    int new_wdr = mInternalParameters.getInt("wdr");
-
-    if (0 <= new_wdr) {
-        if (mSecCamera->setWDR(new_wdr) < 0) {
-            LOGE("ERR(%s):Fail on mSecCamera->setWDR(%d)", __func__, new_wdr);
-            ret = UNKNOWN_ERROR;
-        }
-    }
-
-    //anti shake
-    int new_anti_shake = mInternalParameters.getInt("anti-shake");
-
-    if (0 <= new_anti_shake) {
-        if (mSecCamera->setAntiShake(new_anti_shake) < 0) {
-            LOGE("ERR(%s):Fail on mSecCamera->setWDR(%d)", __func__, new_anti_shake);
-            ret = UNKNOWN_ERROR;
-        }
-    }
-
-    // gps latitude
-    const char *new_gps_latitude_str = params.get(CameraParameters::KEY_GPS_LATITUDE);
-    if (mSecCamera->setGPSLatitude(new_gps_latitude_str) < 0) {
-        LOGE("%s::mSecCamera->setGPSLatitude(%s) fail", __func__, new_gps_latitude_str);
-        ret = UNKNOWN_ERROR;
-    } else {
-        if (new_gps_latitude_str) {
-            mParameters.set(CameraParameters::KEY_GPS_LATITUDE, new_gps_latitude_str);
-        } else {
-            mParameters.remove(CameraParameters::KEY_GPS_LATITUDE);
-        }
-    }
-
-    // gps longitude
-    const char *new_gps_longitude_str = params.get(CameraParameters::KEY_GPS_LONGITUDE);
-
-    if (mSecCamera->setGPSLongitude(new_gps_longitude_str) < 0) {
-        LOGE("%s::mSecCamera->setGPSLongitude(%s) fail", __func__, new_gps_longitude_str);
-        ret = UNKNOWN_ERROR;
-    } else {
-        if (new_gps_longitude_str) {
-            mParameters.set(CameraParameters::KEY_GPS_LONGITUDE, new_gps_longitude_str);
-        } else {
-            mParameters.remove(CameraParameters::KEY_GPS_LONGITUDE);
-        }
-    }
-
-    // gps altitude
-    const char *new_gps_altitude_str = params.get(CameraParameters::KEY_GPS_ALTITUDE);
-
-    if (mSecCamera->setGPSAltitude(new_gps_altitude_str) < 0) {
-        LOGE("%s::mSecCamera->setGPSAltitude(%s) fail", __func__, new_gps_altitude_str);
-        ret = UNKNOWN_ERROR;
-    } else {
-        if (new_gps_altitude_str) {
-            mParameters.set(CameraParameters::KEY_GPS_ALTITUDE, new_gps_altitude_str);
-        } else {
-            mParameters.remove(CameraParameters::KEY_GPS_ALTITUDE);
-        }
-    }
-
-    // gps timestamp
-    const char *new_gps_timestamp_str = params.get(CameraParameters::KEY_GPS_TIMESTAMP);
-
-    if (mSecCamera->setGPSTimeStamp(new_gps_timestamp_str) < 0) {
-        LOGE("%s::mSecCamera->setGPSTimeStamp(%s) fail", __func__, new_gps_timestamp_str);
-        ret = UNKNOWN_ERROR;
-    } else {
-        if (new_gps_timestamp_str) {
-            mParameters.set(CameraParameters::KEY_GPS_TIMESTAMP, new_gps_timestamp_str);
-        } else {
-            mParameters.remove(CameraParameters::KEY_GPS_TIMESTAMP);
-        }
-    }
-
-    // gps processing method
-    const char *new_gps_processing_method_str = params.get(CameraParameters::KEY_GPS_PROCESSING_METHOD);
-
-    if (mSecCamera->setGPSProcessingMethod(new_gps_processing_method_str) < 0) {
-        LOGE("%s::mSecCamera->setGPSProcessingMethod(%s) fail", __func__, new_gps_processing_method_str);
-        ret = UNKNOWN_ERROR;
-    } else {
-        if (new_gps_processing_method_str) {
-            mParameters.set(CameraParameters::KEY_GPS_PROCESSING_METHOD, new_gps_processing_method_str);
-        } else {
-            mParameters.remove(CameraParameters::KEY_GPS_PROCESSING_METHOD);
-        }
-    }
-
     // Recording size
     int new_recording_width = mInternalParameters.getInt("recording-size-width");
     int new_recording_height= mInternalParameters.getInt("recording-size-height");
@@ -1930,51 +1840,6 @@ status_t CameraHardwareSec::setParameters(const CameraParameters& params)
         if (mSecCamera->setRecordingSize(new_preview_width, new_preview_height) < 0) {
             LOGE("ERR(%s):Fail on mSecCamera->setRecordingSize(width(%d), height(%d))", __func__, new_preview_width, new_preview_height);
             ret = UNKNOWN_ERROR;
-        }
-    }
-
-    //gamma
-    const char *new_gamma_str = mInternalParameters.get("video_recording_gamma");
-
-    if (new_gamma_str != NULL) {
-        int new_gamma = -1;
-        if (!strcmp(new_gamma_str, "off"))
-            new_gamma = GAMMA_OFF;
-        else if (!strcmp(new_gamma_str, "on"))
-            new_gamma = GAMMA_ON;
-        else {
-            LOGE("%s::unmatched gamma(%s)", __func__, new_gamma_str);
-            ret = UNKNOWN_ERROR;
-        }
-
-        if (0 <= new_gamma) {
-            if (mSecCamera->setGamma(new_gamma) < 0) {
-                LOGE("%s::mSecCamera->setGamma(%d) fail", __func__, new_gamma);
-                ret = UNKNOWN_ERROR;
-            }
-        }
-    }
-
-    //slow ae
-    const char *new_slow_ae_str = mInternalParameters.get("slow_ae");
-
-    if (new_slow_ae_str != NULL) {
-        int new_slow_ae = -1;
-
-        if (!strcmp(new_slow_ae_str, "off"))
-            new_slow_ae = SLOW_AE_OFF;
-        else if (!strcmp(new_slow_ae_str, "on"))
-            new_slow_ae = SLOW_AE_ON;
-        else {
-            LOGE("%s::unmatched slow_ae(%s)", __func__, new_slow_ae_str);
-            ret = UNKNOWN_ERROR;
-        }
-
-        if (0 <= new_slow_ae) {
-            if (mSecCamera->setSlowAE(new_slow_ae) < 0) {
-                LOGE("%s::mSecCamera->setSlowAE(%d) fail", __func__, new_slow_ae);
-                ret = UNKNOWN_ERROR;
-            }
         }
     }
 
