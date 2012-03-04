@@ -34,11 +34,7 @@ adb pull /system/lib/libakm.so ../../../vendor/samsung/galaxytab7c/proprietary
 adb pull /system/lib/hw/sensors.s5pc110.so ../../../vendor/samsung/galaxytab7c/proprietary
 
 # wifi
-adb pull /system/etc/wifi/nvram_net.txt ../../../vendor/samsung/galaxytab7c/proprietary
-adb pull /system/etc/wifi/nvram_mfg.txt ../../../vendor/samsung/galaxytab7c/proprietary
-adb pull /system/etc/wifi/bcm4329_aps.bin ../../../vendor/samsung/galaxytab7c/proprietary
-adb pull /system/etc/wifi/bcm4329_mfg.bin ../../../vendor/samsung/galaxytab7c/proprietary
-adb pull /system/etc/wifi/bcm4329_sta.bin ../../../vendor/samsung/galaxytab7c/proprietary
+adb pull /system/vendor/firmware/nvram_net.txt ../../../vendor/samsung/galaxytab7c/proprietary
 
 # gfx
 adb pull /system/bin/pvrsrvinit ../../../vendor/samsung/galaxytab7c/proprietary
@@ -145,11 +141,7 @@ PRODUCT_COPY_FILES += \\
 
 # wifi
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/galaxytab7c/proprietary/nvram_net.txt:system/etc/wifi/nvram_net.txt \\
-    vendor/samsung/galaxytab7c/proprietary/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
-    vendor/samsung/galaxytab7c/proprietary/bcm4329_aps.bin:system/etc/wifi/bcm4329_aps.bin \\
-    vendor/samsung/galaxytab7c/proprietary/bcm4329_mfg.bin:system/etc/wifi/bcm4329_mfg.bin \\
-    vendor/samsung/galaxytab7c/proprietary/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin
+    vendor/samsung/galaxytab7c/proprietary/nvram_net.txt:system/vendor/firmware/nvram_net.txt
 
 # low power mode
 PRODUCT_COPY_FILES += \\
