@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_galaxytab7c.mk
+    $(LOCAL_DIR)/full_p1c.mk

@@ -11,8 +11,8 @@ loglevel 9
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-    setprop ro.build.product galaxytab7c
-    setprop ro.product.device galaxytab7c
+    setprop ro.build.product p1c
+    setprop ro.product.device p1c
     setprop ro.radio.noril yes
 
 # fake some battery state

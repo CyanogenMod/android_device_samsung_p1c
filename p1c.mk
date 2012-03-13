@@ -38,13 +38,13 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/galaxytab7c/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 
 # Init files
 PRODUCT_COPY_FILES := \
-	device/samsung/galaxytab7c/init.sch-i800.rc:root/init.sch-i800.rc \
+	device/samsung/p1c/init.sch-i800.rc:root/init.sch-i800.rc \
 	device/samsung/p1-common/usb.rc:root/init.sch-i800.usb.rc \
-	device/samsung/galaxytab7c/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc
+	device/samsung/p1c/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -52,7 +52,7 @@ PRODUCT_COPY_FILES += \
 
 # vold
 PRODUCT_COPY_FILES += \
-        device/samsung/galaxytab7c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+        device/samsung/p1c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # Verizon cdma stuff
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -74,11 +74,11 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # other kernel modules not in ramdisk
 PRODUCT_COPY_FILES += $(foreach module,\
-    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/galaxytab7c/modules/*.ko)),\
+    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/p1c/modules/*.ko)),\
     $(module):system/lib/modules/$(notdir $(module)))
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/galaxytab7c/kernel
+    LOCAL_KERNEL := device/samsung/p1c/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -88,7 +88,7 @@ PRODUCT_COPY_FILES += \
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
-	device/samsung/galaxytab7c/updater.sh:updater.sh
+	device/samsung/p1c/updater.sh:updater.sh
 
 # Inherit p1-common common device configuration.
 $(call inherit-product, device/samsung/p1-common/device_base.mk)
@@ -97,4 +97,4 @@ $(call inherit-product, device/samsung/p1-common/device_base.mk)
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/galaxytab7c/galaxytab7c-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/p1c/p1c-vendor.mk)

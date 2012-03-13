@@ -19,13 +19,13 @@
 #
 
 # Use the non-open-source parts, if they're present
--include vendor/samsung/galaxytab7c/BoardConfigVendor.mk
+-include vendor/samsung/p1c/BoardConfigVendor.mk
 
 # kernel
-TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7c/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/p1c/kernel
 
 # Asserts
-TARGET_OTA_ASSERT_DEVICE := galaxytab7c,SCH-I800,SPH-P100
+TARGET_OTA_ASSERT_DEVICE := galaxytab7c,p1c,SCH-I800,SPH-P100,vzwtab
 
 # Import the p1-common BoardConfigCommon.mk
 include device/samsung/p1-common/BoardConfigCommon.mk
