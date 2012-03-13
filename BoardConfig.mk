@@ -18,94 +18,14 @@
 # Product-specific compile-time definitions.
 #
 
-# Set this up here so that BoardVendorConfig.mk can override it
-BOARD_USES_GENERIC_AUDIO := false
-
-BOARD_USES_LIBSECRIL_STUB := true
-
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxytab7c/BoardConfigVendor.mk
 
-# ARMv7-A Cortex-A8 architecture
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
-
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
-
-TARGET_PROVIDES_INIT := true
-TARGET_RECOVERY_INITRC := device/samsung/galaxytab7c/recovery.rc
-
-TARGET_BOARD_PLATFORM := s5pc110
-TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
-TARGET_BOOTLOADER_BOARD_NAME := s5pc110
-
-TARGET_PROVIDES_LIBAUDIO := true
-
-# Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxytab7c/releasetools/galaxytab7c_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxytab7c/releasetools/galaxytab7c_img_from_target_files
-
-# Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
-
-# WiFi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
-BOARD_WLAN_DEVICE := bcm4329
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_PATH_STA := "/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_PATH_AP := "/vendor/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_NAME := "bcm4329"
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
-
-USE_CAMERA_STUB := false
-ifeq ($(USE_CAMERA_STUB),false)
-BOARD_CAMERA_LIBRARIES := libcamera
-endif
-BOARD_V4L2_DEVICE := /dev/video1
-BOARD_CAMERA_DEVICE := /dev/video0
-BOARD_SECOND_CAMERA_DEVICE := /dev/video2
-
-# OpenGL stuff
-BOARD_EGL_CFG := device/samsung/galaxytab7c/prebuilt/lib/egl/egl.cfg
-USE_OPENGL_RENDERER := true
-
-# skia
-BOARD_USE_SKIA_LCDTEXT := true
-
-# Device related defines
-BOARD_NAND_PAGE_SIZE := 4096 -s 128
-BOARD_KERNEL_BASE := 0x32000000
-BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
+# kernel
 TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7c/kernel
-
-BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 262144000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1319108608
-BOARD_FLASH_BLOCK_SIZE := 4096
-
-# Vold
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-
-# Recovery
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7c/shbootimg.mk
-TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
-BOARD_USES_BML_OVER_MTD := true
-
-# MTP
-BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
 
 # Asserts
 TARGET_OTA_ASSERT_DEVICE := galaxytab7c,SCH-I800,SPH-P100
 
+# Import the p1-common BoardConfigCommon.mk
+include device/samsung/p1-common/BoardConfigCommon.mk
