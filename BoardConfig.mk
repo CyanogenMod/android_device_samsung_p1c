@@ -21,6 +21,10 @@
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/p1c/BoardConfigVendor.mk
 
+# Releasetools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/p1c/releasetools/p1c_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/p1c/releasetools/p1c_img_from_target_files
+
 # kernel
 TARGET_PREBUILT_KERNEL := device/samsung/p1c/kernel
 
