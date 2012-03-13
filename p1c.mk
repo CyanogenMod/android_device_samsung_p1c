@@ -86,10 +86,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-# copy the filesystem converter
-PRODUCT_COPY_FILES += \
-	device/samsung/p1c/updater.sh:updater.sh
-
 # Inherit p1-common common device configuration.
 $(call inherit-product, device/samsung/p1-common/device_base.mk)
 
