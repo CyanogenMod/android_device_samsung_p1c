@@ -55,4 +55,8 @@
          device is data-only. -->
     <bool name="config_voice_capable">false</bool>
 
+    <!-- If this value is true, we handle Samsung CDMA's message ID method -->
+    <!-- needed for incoming SMS on CDMA tablets -->
+    <bool name="config_smsSamsungCdmaAlternateMessageIDEncoding">true</bool>
+
 </resources>
