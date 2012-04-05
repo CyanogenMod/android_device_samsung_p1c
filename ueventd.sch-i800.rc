@@ -17,6 +17,9 @@
 /dev/s3c-mem              0660   system     system
 /dev/s3c-mfc              0660   media      media
 
+# for ddc
+/dev/i2c-1                0660   system     graphics
+
 # for copybit
 /dev/pmem_gpu1            0660   system     graphics
 
