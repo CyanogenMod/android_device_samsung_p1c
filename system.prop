@@ -1,5 +1,5 @@
 #
-# system.prop for smdkc110
+# system.prop for p1c
 #
 
 rild.libpath=/system/lib/libsec-ril40.so
