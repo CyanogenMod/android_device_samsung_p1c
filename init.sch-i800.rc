@@ -1,5 +1,5 @@
 import init.p1-common.rc
-import init.sch-i800.usb.rc
+import usb.rc
 
 on post-fs
 

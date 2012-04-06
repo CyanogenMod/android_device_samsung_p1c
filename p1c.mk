@@ -43,7 +43,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 # Init files
 PRODUCT_COPY_FILES := \
 	device/samsung/p1c/init.sch-i800.rc:root/init.sch-i800.rc \
-	device/samsung/p1-common/usb.rc:root/init.sch-i800.usb.rc \
 	device/samsung/p1c/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc
 
 # These are the hardware-specific features
