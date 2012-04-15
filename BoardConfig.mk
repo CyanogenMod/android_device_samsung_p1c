@@ -21,9 +21,6 @@
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/p1c/BoardConfigVendor.mk
 
-# wifi
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
-
 # Releasetools
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/p1c/releasetools/p1c_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/p1c/releasetools/p1c_img_from_target_files
