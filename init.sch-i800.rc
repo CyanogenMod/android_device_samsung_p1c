@@ -17,7 +17,12 @@ service pppd_cdma /system/bin/pppd_runner
    group radio cache inet misc system
    disabled
    oneshot
-    
+
+service gps-daemon /system/vendor/bin/gpsd
+    class late_start
+    user system
+    group system inet
+
 on property:ril.cdma.data_state=1
     start pppd_cdma
     setprop ril.cdma.data_state 2
