@@ -69,7 +69,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
        net.cdma.ppp.interface=ppp0 \
        net.connectivity.type=CDMA1 \
        net.interfaces.defaultroute=cdma \
-       mobiledata.interfaces=eth0,ppp0
+       mobiledata.interfaces=wlan0,ppp0
 
 # Inherit p1-common common device configuration.
 $(call inherit-product, device/samsung/p1-common/device_base.mk)
