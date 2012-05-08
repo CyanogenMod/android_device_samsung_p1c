@@ -11,6 +11,9 @@ on boot
     setprop ro.build.product p1c
     setprop ro.product.device p1c
 
+    # set BT MAC
+    setprop ro.bt.bdaddr_path /data/bdaddr
+
 service pppd_cdma /system/bin/pppd_runner
    class main
    user root
@@ -23,6 +26,12 @@ service gps-daemon /system/vendor/bin/gpsd
     user system
     group system inet
 
+service bdaddr /system/bin/bdaddr_read
+    class main
+    user root
+    disabled
+    oneshot
+
 on property:ril.cdma.data_state=1
     start pppd_cdma
     setprop ril.cdma.data_state 2
@@ -30,3 +39,5 @@ on property:ril.cdma.data_state=1
 on property:ril.cdma.data_state=0
     stop pppd_cdma
 
+on property:sys.boot_completed=1
+    start bdaddr
