@@ -41,7 +41,4 @@
     <!-- needed for incoming SMS on CDMA tablets -->
     <bool name="config_smsSamsungCdmaAlternateMessageIDEncoding">true</bool>
 
-    <!-- If true, Device uses Samsung CDMA Signal Strength fix for displaying signal bars -->
-    <bool name="config_SamsungCDMASignalStrength">true</bool>
-
 </resources>
