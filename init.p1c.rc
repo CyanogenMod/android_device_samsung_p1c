@@ -1,11 +1,6 @@
 import init.p1-common.rc
 import usb.rc
 
-on post-fs
-
-# samsung module
-    insmod /system/lib/modules/storage.ko
-
 on boot
 
     setprop ro.build.product p1c
