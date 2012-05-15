@@ -53,6 +53,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/samsung/p1c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
+# RIL
+PRODUCT_COPY_FILES += \
+	device/samsung/p1c/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up
+
 # Verizon cdma stuff
 PRODUCT_PROPERTY_OVERRIDES := \
        ro.telephony.default_network=4 \
