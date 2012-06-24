@@ -12,26 +12,26 @@ etc/gps.conf
 
 ## sensors
 lib/libakm.so
-lib/hw/sensors.s5pc110.so
+lib/hw/sensors.SCH-I800.so
 
 ## wifi
-vendor/firmware/nvram_net.txt
+etc/wifi/nvram_net.txt
 
 ## gfx
 bin/pvrsrvinit
 lib/egl/libGLES_android.so
-vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
-vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
-vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
-vendor/lib/hw/gralloc.s5pc110.so
-vendor/lib/libglslcompiler.so
-vendor/lib/libIMGegl.so
-vendor/lib/libpvr2d.so
-vendor/lib/libpvrANDROID_WSEGL.so
-vendor/lib/libPVRScopeServices.so
-vendor/lib/libsrv_init.so
-vendor/lib/libsrv_um.so
-vendor/lib/libusc.so
+lib/egl/libEGL_POWERVR_SGX540_120.so
+lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
+lib/egl/libGLESv2_POWERVR_SGX540_120.so
+lib/hw/gralloc.s5pc110.so
+lib/libglslcompiler.so
+lib/libIMGegl.so
+lib/libpvr2d.so
+lib/libpvrANDROID_WSEGL.so
+lib/libPVRScopeServices.so
+lib/libsrv_init.so
+lib/libsrv_um.so
+lib/libusc.so
 
 ## low power mode
 bin/charging_mode
@@ -62,7 +62,7 @@ media/chargingwarning_temp.qmg
 media/usb_not_charging.qmg
 
 ## bluetooth
-bin/BCM4329B1_002.002.023.0534.0590.hcd
+bin/BCM4329B1_002.002.023.0534.0571.hcd
 
 ## tvout
 lib/libddc.so
