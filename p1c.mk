@@ -42,20 +42,20 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 
 # Init files
 PRODUCT_COPY_FILES := \
-	device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
-	device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc
+    device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
+    device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-	frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
 # vold
 PRODUCT_COPY_FILES += \
-        device/samsung/p1c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+    device/samsung/p1c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # RIL
 PRODUCT_COPY_FILES += \
-	device/samsung/p1c/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up
+    device/samsung/p1c/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up
 
 # Verizon cdma stuff
 PRODUCT_PROPERTY_OVERRIDES := \

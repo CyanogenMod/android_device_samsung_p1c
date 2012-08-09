@@ -1,5 +1,5 @@
 import init.p1-common.rc
-import usb.rc
+import init.p1.usb.rc
 
 on boot
 
