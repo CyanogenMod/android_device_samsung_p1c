@@ -1,10 +1,21 @@
 import init.p1-common.rc
 import init.p1.usb.rc
 
+on init
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+
 on boot
 
     setprop ro.build.product p1c
     setprop ro.product.device p1c
+
+on fs
+    mount ext4 /dev/block/mmcblk0p2 /system ro noatime nodev nomblk_io_submit errors=panic wait
+    mount ext4 /dev/block/mmcblk0p3 /cache noatime nodev nosuid nomblk_io_submit errors=panic wait
 
 service pppd_cdma /system/bin/pppd_runner
    class main
@@ -14,7 +25,7 @@ service pppd_cdma /system/bin/pppd_runner
    oneshot
 
 service gps-daemon /system/vendor/bin/gpsd
-    class late_start
+    class main
     user system
     group system inet
 
