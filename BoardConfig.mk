@@ -32,5 +32,13 @@ TARGET_KERNEL_CONFIG := cyanogenmod_p1c_defconfig
 # Asserts
 TARGET_OTA_ASSERT_DEVICE := galaxytab7c,p1c,SCH-I800,SPH-P100,vzwtab
 
+# boot.img
+BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
+
+# Dummy values
+# we don't need these img files, but default sizes are way too low
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 262144000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 262144000
+
 # Import the p1-common BoardConfigCommon.mk
 include device/samsung/p1-common/BoardConfigCommon.mk
