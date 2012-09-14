@@ -15,7 +15,7 @@ on boot
 
 on fs
     mount ext4 /dev/block/mmcblk0p2 /system ro noatime nodev nomblk_io_submit errors=panic wait
-    mount ext4 /dev/block/mmcblk0p3 /cache noatime nodev nosuid nomblk_io_submit errors=panic wait
+    mount ext4 /dev/block/mmcblk0p1 /cache noatime nodev nosuid nomblk_io_submit errors=panic wait
 
 service pppd_cdma /system/bin/pppd_runner
    class main
