@@ -42,6 +42,7 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 
 # Init files
 PRODUCT_COPY_FILES := \
+    device/samsung/p1c/fstab.p1c:root/fstab.p1c \
     device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
     device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc
 
