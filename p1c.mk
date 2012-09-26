@@ -76,6 +76,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
        net.interfaces.defaultroute=cdma \
        mobiledata.interfaces=wlan0,ppp0
 
+# keep dalvik on /data partition
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dexopt-data-only=1
+
 # Inherit p1-common common device configuration.
 $(call inherit-product, device/samsung/p1-common/device_base.mk)
 
