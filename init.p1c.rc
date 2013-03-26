@@ -33,3 +33,8 @@ on property:ril.cdma.data_state=1
 on property:ril.cdma.data_state=0
     stop pppd_cdma
 
+on property:gsm.sim.state=NOT_READY
+    # this is a CDMA device with no SIM card, and this property must be set
+    # to READY for the data usage tracker to work properly
+    setprop gsm.sim.state READY
+
