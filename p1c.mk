@@ -44,7 +44,8 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 PRODUCT_COPY_FILES := \
     device/samsung/p1c/fstab.p1c:root/fstab.p1c \
     device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
-    device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc
+    device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc \
+    device/samsung/p1-common/init.recovery.rc:root/init.recovery.p1c.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
