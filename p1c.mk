@@ -45,7 +45,9 @@ PRODUCT_COPY_FILES := \
     device/samsung/p1c/fstab.p1c:root/fstab.p1c \
     device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
     device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc \
-    device/samsung/p1-common/init.recovery.rc:root/init.recovery.p1c.rc
+    device/samsung/p1-common/init.recovery.rc:root/init.recovery.p1c.rc \
+    device/samsung/p1c/init.p1c.usb.rc:root/init.p1c.usb.rc \
+    device/samsung/p1c/init.p1c.usb.rc:recovery/root/usb.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \

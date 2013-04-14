@@ -1,5 +1,5 @@
 import init.p1-common.rc
-import init.p1.usb.rc
+import init.p1c.usb.rc
 
 on init
     export EXTERNAL_STORAGE /storage/sdcard0

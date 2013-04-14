@@ -1,0 +1,30 @@
+on property:sys.usb.config=none
+    write /sys/devices/virtual/usb_composite/rndis/enable 0
+
+on property:sys.usb.config=mass_storage
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mass_storage,adb
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=rndis
+    exec /system/bin/netcfg usb0 up
+    write /sys/devices/virtual/usb_composite/rndis/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=rndis,adb
+    exec /system/bin/netcfg usb0 up
+    write /sys/devices/virtual/usb_composite/rndis/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mtp
+    write /sys/devices/virtual/usb_composite/mtp/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mtp,adb
+    write /sys/devices/virtual/usb_composite/mtp/enable 0
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
