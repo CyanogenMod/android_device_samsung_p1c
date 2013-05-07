@@ -41,4 +41,11 @@
     <!-- needed for incoming SMS on CDMA tablets -->
     <bool name="config_smsSamsungCdmaAlternateMessageIDEncoding">true</bool>
 
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         USB interfaces.  If the device doesn't want to support tething over USB this should
+         be empty.  An example would be "usb.*" -->
+    <string-array translatable="false" name="config_tether_usb_regexs">
+        <item>"usb0"</item>
+    </string-array>
+
 </resources>
